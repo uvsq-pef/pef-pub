@@ -1,0 +1,310 @@
+= Rust RefCard
+
+== Le langage Rust
+* Conçu et développé par Graydon Hoare (Mozilla Research) depuis 2010
+* Première version stable en 2015
+* Langage compilé à typage statique fort
+* Supporte les paradigmes impératif, fonctionnel et concurrent
+* Est accompagné de _cargo_ pour la gestion de la compilation et des bibliothèques
+* Accès mémoire validés statiquement par le compilateur (_borrow checker_)
+* Pas de _garbage collector_
+
+== Quelques domaines d'application
+* Parfois vu comme un possible successeur de C/C++
+* Programmation système
+* Applications en ligne de commande
+* Applications Web (via WebAssembly)
+* Services réseaux
+* Systèmes embarqués. 
+
+== Quelques outils de développement
+* Le compilateur https://doc.rust-lang.org/rustc/index.html[`rustc`] ainsi que l'environnement de développement est préférentiellement installé avec l'outil de distribution https://github.com/rust-lang/rustup[`rustup`]
+* https://doc.rust-lang.org/cargo/index.html[`cargo`] est le gestionnaire de compilation et de dépendance
+* https://crates.io/[`crates.io`] est le dépôt central des bibliothèques du langage
+* https://github.com/rust-lang/rustfmt[`rustfmt`] formate les fichiers sources
+* https://doc.rust-lang.org/rustdoc/index.html[`rustdoc`] génère la documentation de l'API d'une application
+* https://github.com/rust-lang/rust-clippy[`clippy`] est un _linter_ pour le code Rust
+
+== "Hello World" en Rust
+.src/intro/exemples/hello.rs
+[source,rust,indent=0]
+----
+include::exemples/hello.rs[]
+----
+<1> Le programme principal est représenté par la fonction `main`
+<2> La macro `println!` affiche un texte sur la sortie standard
+
+== Gestion de la compilation
+=== Compilateur
+* Le compilateur Rust se nomme https://doc.rust-lang.org/rustc/index.html[`rustc`]
++
+[source,bash]
+----
+$ rustc hello.rs
+----
+* Quelques options
++
+[horizontal]
+`-L`:: ajoute un répertoire au chemin de recherche des bibliothèques
+`--edition`:: précise l'https://doc.rust-lang.org/edition-guide/introduction.html[édition] de Rust à utiliser (2015|2018|2021)
+`--emit`:: spécifie le type de fichiers de sortie à générer
+`-g`:: inclut les informations de débogage
+`-O`:: optimise le code
+`--explain`:: donne des détails sur un message d'erreur
+`--test`:: génère un programme pour exécuter les tests à la place du `main`
+
+ifdef::backend-revealjs[== !]
+
+=== Système de build
+* Le système de build intégré avec Rust se nomme https://doc.rust-lang.org/cargo/index.html[`cargo`]
++
+[source,bash]
+----
+$ cd src/intro/exemples/hello
+$ cargo build
+   Compiling hello v0.1.0 (src/intro/exemples/hello)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.42s
+$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/hello`
+Hello, world!
+----
+* Quelques commandes et options
++
+[horizontal]
+`build`:: construit le _crate_ en mode débogage
+`--release`::: optimise le code et génère en mode distribution
+`check`:: vérifie le _crate_ sans générer d'exécutable
+`run`:: exécute le _crate_
+`test`:: compile et exécute les tests
+
+ifdef::backend-revealjs[== !]
+
+=== Exécuter le programme
+* Le programme généré est un exécutable natif du système cible
++
+[source,bash]
+----
+$ ./hello
+----
+
+== Débuter un projet Rust
+* L'initialisation d'un projet Rust s'appuie sur `cargo`
++
+[source,bash]
+----
+$ cargo new hello
+$ tree hello
+hello
+├── Cargo.toml
+└── src
+    └── main.rs
+$ cd hello/
+$ cargo build
+----
+* `cargo` initialise un projet Rust avec
+** un nouveau répertoire du nom du projet,
+** un dépôt `git`,
+** un fichier `Cargo.toml` décrivant le projet,
+** un sous-répertoire pour le code source,
+** un fichier `main.rs` contenant le `main` du _crate_
+
+== Notions de base
+* Un code source Rust est une séquence de caractères Unicode UTF-8
+* Une unité de compilation Rust est dénommée un https://doc.rust-lang.org/stable/reference/crates-and-source-files.html[_crate_]
+* Un _crate_ contient des https://doc.rust-lang.org/stable/reference/items/modules.html[_modules_] imbriqués
+* Un fichier source (extension `.rs`) est un module
+* La plupart des instructions se terminent par un `;`
+
+
+== Commentaires
+* https://doc.rust-lang.org/stable/reference/comments.html[Commentaires]
+[horizontal]
+`/* ... */`::: le texte entre `/*` et `*/` est ignoré (peuvent être imbriqués)
+`/** ... */`::: commentaire de documentation (équiv. à l'https://doc.rust-lang.org/stable/rustdoc/the-doc-attribute.html[attribut doc] `#[doc="..."]`)
+`/*! ... */`::: commentaire de documentation interne (équiv. à l'https://doc.rust-lang.org/stable/rustdoc/the-doc-attribute.html[attribut doc] `#[doc="..."]`)
+`// ...`::: le texte jusqu'à la fin de la ligne est ignoré
+`/// ...`::: commentaire de documentation (équiv. à l'https://doc.rust-lang.org/stable/rustdoc/the-doc-attribute.html[attribut doc] `#[doc="..."]`)
+`//! ...`::: commentaire de documentation interne (équiv. à l'https://doc.rust-lang.org/stable/rustdoc/the-doc-attribute.html[attribut doc] `#[doc="..."]`)
+
+== Système de typage
+* Le https://doc.rust-lang.org/stable/reference/types.html[type] d'une valeur définit l'interprétation de l'emplacement mémoire la contenant ainsi que les opérations qu'on peut lui appliquer.
+* Chaque variable ou expression possède un type
+* Rust est un langage à _typage statique_
+* Le compilateur peut en général inférer le type d'une variable à partir de son contenu
+
+== Types primitifs
+[horizontal]
+`bool`:: Booléen (`true` ou `false`)
+`i8, i16, i32, i64, i128, isize`:: Entier signé (8, 16, 32, 64, 128 bits ou dépendant de l'architecture)
+`u8, u16, u32, u64, u128, usize`:: Entier non signé (8, 16, 32, 64, 128 bits ou dépendant de l'architecture)
+`f32, f64`:: Nombre en virgule flottante (simple ou double précision)
+`char`:: Caractère Unicode (32 bits)
+`str`:: Chaîne de caractères UTF-8 (taille dynamique)
+
+== Littéraux
+* Un https://doc.rust-lang.org/stable/reference/tokens.html#literals[littéral] représente la valeur d'un type
+* Quelques littéraux
+[horizontal]
+`'C'`:: Caractère Unicode (`b'C'` pour un caractère ASCII)
+`"chaîne"`:: Chaîne de caractères Unicode (`b"chaîne"` pour une chaîne ASCII)
+`12345`:: Entier (`0xFF` en hexa, `0o77` en octal, `0b1111` en binaire)
+`123.0E+77`:: Nombre à virgule flottante
+* Le caractère `_` peut être utilisé pour rendre les nombres plus lisibles
+* Un suffixe de type sur un nombre permet de préciser le type souhaité (`123u64`, `12E+99_f64`)
+
+== Variables
+* Les variables en Rust sont par défaut immuables
+** par défaut, quand une valeur est attachée à une variable, elle ne peut plus être modifiée
+* Le mot-clé `let` permet de déclarer une variable
++
+[source,rust,indent=0]
+----
+let x = 5;
+----
+* Une variable peut être rendue modifiable avec le mot-clé `mut`
++
+[source,rust,indent=0]
+----
+let mut x = 5;
+----
+* Le nom d'une variable peut être réutilisé (https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#shadowing[_Shadowing_])
++
+[source,rust,indent=0]
+----
+let x = 5;
+let x = x * 2;
+----
+
+== Constantes
+* Une constante est introduite par le mot-clé `const` et doit être annotée par son type
++
+[source,rust,indent=0]
+----
+const MAX_POINTS: u32 = 100_000;
+----
+* Une constante peut être déclarée dans n'importe quelle portée et doit être initialisée par une expression constante
+
+== Structures de contrôle
+=== Conditionnelle
+* Expression `if`
++
+[source,rust,indent=0]
+----
+let number = if condition { 5 } else { 6 };
+if number < 5 {
+    // OK
+} else {
+    // KO
+}
+----
+
+ifdef::backend-revealjs[== !]
+
+=== Boucles
+* `loop`
++
+[source,rust,indent=0]
+----
+let result = loop {
+    counter += 1;
+    if counter == 10 {
+        break counter * 2;
+    }
+};
+----
+** la boucle se poursuit tant que le mot-clé `break` n'est pas utilisé
+** une expression `loop` terminée par `break` accepte une valeur de retour
+* `while`
++
+[source,rust,indent=0]
+----
+while number != 0 {
+    println!("{}!", number);
+    number -= 1;
+}
+----
+** la boucle se poursuit tant que la condition est vraie
+* `for`
++
+[source,rust,indent=0]
+----
+let elements = [10, 20, 30, 40, 50];
+for element in elements.iter() {
+    println!("the value is: {}", element);
+}
+for number in (1..4).rev() {
+    println!("{}!", number);
+}
+----
+** `for` permet d'itérer sur les éléments d'une collection
+** en utilisant une `Range`, on peut manipuler des indices
+
+== Fonction
+* La définition d'une fonction est introduite par le mot-clé `fn`
+* Par convention, le nom de la fonction est écrit en https://fr.wikipedia.org/wiki/Snake_case[_snake case_]
+* Les paramètres sont entre parenthèses
+* Le corps de la fonction est entre accolades `{ }`
++
+[source,rust,indent=0]
+----
+fn another_function(x: i32) {
+    println!("The value of x is: {}", x);
+}
+----
+* Une fonction retourne la valeur de la dernière expression ou l'argument de `return`
++
+[source,rust,indent=0]
+----
+fn five() -> i32 {
+    5
+}
+----
+** l'annotation de type après `->` précise le type de retour
++
+WARNING: pour pouvoir être retournée, la dernière ligne d'une fonction *doit être une expression* (pas de `;`). Une instruction (terminée par un `;`) provoquerait une erreur de compilation.
+
+== Système de modules
+* Rust supporte différents moyens pour organiser un projet
++
+[horizontal]
+Package:: permet de construire, tester et partager des crates avec Cargo
+Crate:: est un arbre de modules produisant une bibliothèque ou un exécutable
+Module:: permet de contrôler l'organisation, l'encapsulation et la portée des _paths_ (avec `use`)
+Path:: est un moyen de nommer un item (fonction, module, ...)
+* Le mot-clé `use` importe un _path_ dans la portée courante
++
+[source,rust,indent=0]
+----
+use std::fmt::Result;
+use std::io::Result as IoResult;
+----
+
+== Bibliothèques
+* Rust est distribué avec une riche https://doc.rust-lang.org/std/index.html[bibliothèque standard]
+** accessible par le _path_ `std`
+** le module https://doc.rust-lang.org/std/prelude/index.html[`std::prelude`] est automatiquement importé dans chaque programme
+** contient entre autre des types importants comme https://doc.rust-lang.org/std/vec/struct.Vec.html[`Vec<T>`] et https://doc.rust-lang.org/std/option/enum.Option.html[`Option<T>`], des https://doc.rust-lang.org/std/index.html#primitives[opérations] sur les types primitifs, des https://doc.rust-lang.org/std/index.html#macros[macros] et des abstractions pour les https://doc.rust-lang.org/std/io/index.html[I/O] et le https://doc.rust-lang.org/std/thread/index.html[multithreading]
+* Bibliothèques externes avec Cargo et https://crates.io/[crates.io]
+
+== Références
+=== Documentation officielle
+* https://www.rust-lang.org/fr/[Site officiel]
+* https://doc.rust-lang.org/book/[The Rust Programming Language], _Steve Klabnik and Carol Nichols_
+* https://doc.rust-lang.org/std/index.html[Documentation] de la bibliothèque standard
+* https://doc.rust-lang.org/reference/index.html[Référence] du langage
+
+ifdef::backend-revealjs[== !]
+
+=== Autres documents
+* https://stevedonovan.github.io/rust-gentle-intro/[A Gentle Introduction To Rust], _Steve Donovan_
+* https://blog.guillaume-gomez.fr/Rust/[Tutoriel Rust], _Guillaume Gomez_
+* https://cheats.rs/[Rust Language Cheat Sheet], _Ralf Biedert_
+* https://serokell.io/blog/learn-rust[17 Resources to Help You Learn Rust in 2021], _Gints Dreimanis_, 2021
+
+ifdef::backend-revealjs[== !]
+
+=== Apprendre en codant
+** https://play.rust-lang.org/[Playground] (coder dans le navigateur)
+** https://github.com/rust-lang/rustlings/[rustlings] (ensemble d'exercices pour apprendre le langage)
+** https://doc.rust-lang.org/stable/rust-by-example/[Rust by Example] (exemples exécutables dans le navigateur)
