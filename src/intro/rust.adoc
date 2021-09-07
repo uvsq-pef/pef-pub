@@ -1,7 +1,7 @@
 = Rust RefCard
 
 == Le langage Rust
-* Conçu et développé par Graydon Hoare (Mozilla Research) depuis 2010
+* Conçu et développé initialement par Graydon Hoare (Mozilla Research) en 2010
 * Première version stable en 2015
 * Langage compilé à typage statique fort
 * Supporte les paradigmes impératif, fonctionnel et concurrent
@@ -15,7 +15,7 @@
 * Applications en ligne de commande
 * Applications Web (via WebAssembly)
 * Services réseaux
-* Systèmes embarqués. 
+* Systèmes embarqués.
 
 == Quelques outils de développement
 * Le compilateur https://doc.rust-lang.org/rustc/index.html[`rustc`] ainsi que l'environnement de développement est préférentiellement installé avec l'outil de distribution https://github.com/rust-lang/rustup[`rustup`]
@@ -89,7 +89,7 @@ $ ./hello
 ----
 
 == Débuter un projet Rust
-* L'initialisation d'un projet Rust s'appuie sur `cargo`
+* L'initialisation d'un projet Rust s'appuie sur https://doc.rust-lang.org/cargo/index.html[`cargo`]
 +
 [source,bash]
 ----
@@ -116,7 +116,6 @@ $ cargo build
 * Un fichier source (extension `.rs`) est un module
 * La plupart des instructions se terminent par un `;`
 
-
 == Commentaires
 * https://doc.rust-lang.org/stable/reference/comments.html[Commentaires]
 [horizontal]
@@ -128,7 +127,7 @@ $ cargo build
 `//! ...`::: commentaire de documentation interne (équiv. à l'https://doc.rust-lang.org/stable/rustdoc/the-doc-attribute.html[attribut doc] `#[doc="..."]`)
 
 == Système de typage
-* Le https://doc.rust-lang.org/stable/reference/types.html[type] d'une valeur définit l'interprétation de l'emplacement mémoire la contenant ainsi que les opérations qu'on peut lui appliquer.
+* Le https://doc.rust-lang.org/stable/reference/types.html[type] d'une valeur définit l'interprétation de l'emplacement mémoire la contenant ainsi que les opérations qu'on peut lui appliquer
 * Chaque variable ou expression possède un type
 * Rust est un langage à _typage statique_
 * Le compilateur peut en général inférer le type d'une variable à partir de son contenu
@@ -177,13 +176,33 @@ let x = x * 2;
 ----
 
 == Constantes
-* Une constante est introduite par le mot-clé `const` et doit être annotée par son type
+* Une https://doc.rust-lang.org/stable/reference/items/constant-items.html[constante] est introduite par le mot-clé `const` et doit être annotée par son type
 +
 [source,rust,indent=0]
 ----
 const MAX_POINTS: u32 = 100_000;
 ----
 * Une constante peut être déclarée dans n'importe quelle portée et doit être initialisée par une expression constante
+
+TIP: Expérimentez en utilisant par exemple https://github.com/rust-lang/rustlings[rustlings]
+
+== Référence et pointeur
+* En Rust, toute valeur _appartient_ à une variable (https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html[_ownership_])
+* Il est possible d'_emprunter_ (_borrow_) la valeur d'une variable avec une référence (`&`)
+* Pour pouvoir changer une valeur par une référence, il faut que cette dernière soit modifiable (`&mut`)
+* Un https://doc.rust-lang.org/book/ch04-03-slices.html[_slice_] (`[T]`) permet de référencer une portion d'une séquence contiguë d'éléments
+* En plus des références, la bibliothèque standard propose différents types de _smart pointers_
+[horizontal]
+https://doc.rust-lang.org/std/boxed/index.html[`Box<T>`]::: pour allouer des valeurs sur le tas
+https://doc.rust-lang.org/std/rc/index.html[`Rc<T>`]::: un type de comptage de références pour gérer les propriétaires multiples
+https://doc.rust-lang.org/std/cell/index.html[`Ref<T>`, `RefMut<T>`]::: accédé par `RefCell<T>`, un type pour gérer les emprunts lors de l'exécution au lieu de la compilation
+
+== Chaînes de caractères
+* Le type primitif https://doc.rust-lang.org/1.54.0/std/primitive.str.html[`str`] est un slice de type `[u8]` généralement manipulé sous une forme empruntée `&str`
+* La plupart des fonctions suppose qu'une valeur de type `str` contient une chaîne UTF-8
+* Un littéral est de type `&'static str`
+* Le module https://doc.rust-lang.org/std/str/index.html[std::str]
+* Le type https://doc.rust-lang.org/std/string/struct.String.html[std::string::String] permet de représenter des chaînes UTF-8 modifiables
 
 == Structures de contrôle
 === Conditionnelle
@@ -238,12 +257,12 @@ for number in (1..4).rev() {
 }
 ----
 ** `for` permet d'itérer sur les éléments d'une collection
-** en utilisant une `Range`, on peut manipuler des indices
+** en utilisant le type https://doc.rust-lang.org/std/ops/struct.Range.html[`Range`], on peut manipuler des indices
 
 == Fonction
-* La définition d'une fonction est introduite par le mot-clé `fn`
+* La définition d'une https://doc.rust-lang.org/book/ch03-03-how-functions-work.html[fonction] est introduite par le mot-clé `fn`
 * Par convention, le nom de la fonction est écrit en https://fr.wikipedia.org/wiki/Snake_case[_snake case_]
-* Les paramètres sont entre parenthèses
+* Les paramètres sont entre parenthèses et leurs types doivent être précisés
 * Le corps de la fonction est entre accolades `{ }`
 +
 [source,rust,indent=0]
@@ -286,6 +305,18 @@ use std::io::Result as IoResult;
 ** le module https://doc.rust-lang.org/std/prelude/index.html[`std::prelude`] est automatiquement importé dans chaque programme
 ** contient entre autre des types importants comme https://doc.rust-lang.org/std/vec/struct.Vec.html[`Vec<T>`] et https://doc.rust-lang.org/std/option/enum.Option.html[`Option<T>`], des https://doc.rust-lang.org/std/index.html#primitives[opérations] sur les types primitifs, des https://doc.rust-lang.org/std/index.html#macros[macros] et des abstractions pour les https://doc.rust-lang.org/std/io/index.html[I/O] et le https://doc.rust-lang.org/std/thread/index.html[multithreading]
 * Bibliothèques externes avec Cargo et https://crates.io/[crates.io]
+
+== Quelques types et modules importants
+[horizontal]
+https://doc.rust-lang.org/std/ops/struct.Range.html[`Range`]:: représente un intervalle (littéral `start..end`)
+https://doc.rust-lang.org/std/primitive.tuple.html[`Tuple`]:: une séquence finie et hétérogène d'éléments (littéral `("hello", 5, 'c')`)
+https://doc.rust-lang.org/1.54.0/std/primitive.array.html[`Tableau`]:: un tableau de taille fixe d'éléments de même type (littéral `[x, y, z]` ou `[x; N]`)
+https://doc.rust-lang.org/std/vec/struct.Vec.html[`Vec<T>`]:: un tableau de taille variable
+https://doc.rust-lang.org/std/result/index.html[`Result<T, E>`]:: pour retourner et propager une erreur
+https://doc.rust-lang.org/std/option/index.html[`Option<T>`]:: pour représenter une valeur optionnel
+https://doc.rust-lang.org/std/collections/index.html[std::collections]:: manipulation de collections
+https://doc.rust-lang.org/std/fmt/index.html[std::fmt] formatage de chaînes de caractères
+https://doc.rust-lang.org/std/io/index.html[std::io] gestion des I/O
 
 == Références
 === Documentation officielle
