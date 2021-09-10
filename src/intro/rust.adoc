@@ -25,7 +25,7 @@
 * https://doc.rust-lang.org/rustdoc/index.html[`rustdoc`] génère la documentation de l'API d'une application
 * https://github.com/rust-lang/rust-clippy[`clippy`] est un _linter_ pour le code Rust
 
-== "Hello World" en Rust
+== « Hello World » en Rust
 .src/intro/exemples/hello.rs
 [source,rust,indent=0]
 ----
@@ -290,7 +290,7 @@ WARNING: pour pouvoir être retournée, la dernière ligne d'une fonction *doit 
 Package:: permet de construire, tester et partager des crates avec Cargo
 Crate:: est un arbre de modules produisant une bibliothèque ou un exécutable
 Module:: permet de contrôler l'organisation, l'encapsulation et la portée des _paths_ (avec `use`)
-Path:: est un moyen de nommer un item (fonction, module, ...)
+Path:: est un moyen de nommer un item (fonction, module, …)
 * Le mot-clé `use` importe un _path_ dans la portée courante
 +
 [source,rust,indent=0]

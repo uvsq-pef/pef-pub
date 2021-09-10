@@ -12,5 +12,6 @@ include::attributes.adoc[]
 :leveloffset: +1
 
 include::intro/intro.adoc[]
+include::devtools/devtools.adoc[]
 
 :leveloffset: -1

@@ -1,6 +1,6 @@
 = Programmation efficace
 
-== Objectifs du cours "Programmation efficace"
+== Objectifs du cours « Programmation efficace »
 * Comprendre les mécanismes utilisés dans les langages de programmation et leur impact sur l'efficacité des applications
 * Découvrir les caractéristiques d'un langage statiquement typé et compilé
 * Présenter les outils de développement associés (compilateur, build, tests)

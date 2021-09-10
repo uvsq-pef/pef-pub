@@ -2,7 +2,7 @@
 
 == Implémentation des langages
 * Avec un https://en.wikipedia.org/wiki/Compiled_language[_langage compilé_], le code source du programme est transformé en _code machine_ par le _compilateur_
-* Dans un https://en.wikipedia.org/wiki/Interpreted_language[_langage interprété_], le code source du programme est exécuté "à la volée" par l'_interpréteur_
+* Dans un https://en.wikipedia.org/wiki/Interpreted_language[_langage interprété_], le code source du programme est exécuté « à la volée » par l'_interpréteur_
 * Certains langages sont à la fois compilés et interprétés
 * Il existe des approches intermédiaires (compilation _Just In Time_ (JIT))
 
@@ -133,7 +133,7 @@ echo $a + 2; // affiche 2
 * Le typage est _faible_ si les possibilités de transtypage sont nombreuses et implicites
 * Ces notions sont relativement floues
 
-.Le C est à typage fort mais...
+.Le C est à typage fort mais…
 
 [source,C,indent=0]
 ----
