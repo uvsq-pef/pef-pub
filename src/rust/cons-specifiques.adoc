@@ -52,6 +52,17 @@ match v.get(2) {
 v[2] = 42; // car le vecteur v est mutable
 ----
 
+== Initialisation avec une taille connue
+
+[source, rust]
+----
+let n : usize = 100;
+let zero_v = vec![0; n];
+let one_v = vec![1; n];
+----
+
+- `usize` est le type entier pour les positions d'un vecteur.
+
 == Itérer sur un vecteur
 
 [source, rust]
@@ -68,6 +79,39 @@ for i in &v {
 for i in &mut v {
     *i += 1;
 }
+----
+
+== Itérer sur un vecteur (sans référence)
+
+[source, rust]
+----
+let mut v = vec![1, 2, 3, 4, 5];
+
+// itération directement sur le vecteur les éléments du vecteur
+// sont « déplacés » dans i. v ne pourra plut être utilisé par la
+// suite.
+for i in v {
+    println!("{}", i);
+}
+
+v[0] = 15; // ERREUR
+----
+
+- Nous verrons précisément ce point dans le cours sur le _Borrow Checker_.
+
+== Généricité ?
+
+- Le type de `vec![1,2,3]` est `std::Vec<i32>`
+- Le type de `vec!["a","b","c"]` est `std::Vec<&str>`
+
+- `std::Vec<T>` est générique de paramètre `T`
+- `T` peut être remplacé ici par tout autre type
+- Les méthodes de `std::Vec<T>` peuvent utiliser le type générique:
+
+[source, rust]
+----
+pub fn push(&mut self, value: T)   // empile un élément en fin de vecteur
+pub fn pop(&mut self) -> Option<T> // dépile un élément
 ----
 
 == Structures
@@ -110,14 +154,14 @@ fn nouvelle_personne(nom: String, année: i32) -> Personne {
 
 [source, rust]
 ----
-struct ColorRGB(i32, i32, i32);
+struct ColorRGB(u8, u8, u8);
 let color = ColorRGB(255, 0, 0);
 
 // On peut utiliser .0 .1 pour nommer les champs
-println!("red channel = {}", color.0); 
+println!("red channel = {}", color.0);
 
 // On peut aussi déconstruire la structure avec du pattern matching
-let ColorRGB(r, g, b) = color; 
+let ColorRGB(r, g, b) = color;
 ----
 
 == Enum
@@ -137,7 +181,7 @@ let ColorRGB(r, g, b) = color;
 
 ----
 
-    - Ici `Variant` peut contenir au choix un entier signé, une chaîne ou rien du tout. 
+    - Ici `Variant` peut contenir au choix un entier signé, une chaîne ou rien du tout.
     - Chaque instance ne peut avoir qu'un seul des types à la fois.
 
 
@@ -160,9 +204,9 @@ fn affiche(v: Variant) {
 
 - En C/C++ on représente souvent l'absence de valeur par un pointeur `nullptr`.
 - Cet usage est cause de nombreuses erreurs difficiles à détecter, c'est pourquoi Rust interdit les références nulles.
-- Rust utilise le type Enum avec deux variants 
+- Rust utilise le type `Option<T>` avec deux variants
 ** `None` qui représente l'absence de valeur
-** `Some(T)` qui représente une valeur de type `T` (`T` est un type générique quelconque)
+** `Some(T)` qui représente une valeur de type `T` (`T` est un type générique)
 
 == Exemple: std::Option<T>
 
@@ -177,7 +221,7 @@ fn racine(n : f64) -> Option<f64> {
 }
 
 racine(25.0);  // -> Some(5.0)
-racine(-25.0); // -> None 
+racine(-25.0); // -> None
 
 if let Some(r) = racine(25) {
     ...
@@ -201,7 +245,16 @@ enum Result<T, E> {
 ----
 
 - `Result` est semblable à une option mais permet d'encoder une erreur de type `E`.
-- Il est possible de convertir un `Result` en `Option` avec `res.ok()` (et inversement avec `opt.ok_or(err)`).
+
+== Erreurs fatales
+
+- Souvent une fonction a intérêt à retourner un `Result` à l'appelant et lui laisser décider de la marche à suivre en cas d'erreur.
+- Parfois, cela n'a pas de sens et il vaut mieux arrêter le programme avec le macro `!panic()`:
+
+[source, rust]
+----
+panic!("This is not implemented yet.");
+----
 
 == std::Result<T,E>
 
@@ -221,6 +274,22 @@ fn main() {
     };
 }
 ----
+
+== Convertir entre Result<T, E> et Option<T>
+
+- Les types `Result` et `Option` sont proches.
+- Il est possible de convertir un `Result` en `Option` avec `res.ok()` et inversement avec `opt.ok_or(err)`.
+
+[source, rust]
+----
+Ok(10).ok() -> Some(10)
+Err(_).ok() -> None
+
+Some(10).ok_or(Err(E)) -> Ok(10)
+None.ok_or(Err(E)) -> Err(E)
+----
+
+
 
 == Gestion fine d'erreurs
 
@@ -295,10 +364,37 @@ use std::io::Read;
 fn lire_fichier() -> Result<String, io::Error> {
     let mut s = String::new();
 
-    // À chaque utilisation de ? si une erreur se produit, 
+    // À chaque utilisation de ? si une erreur se produit,
     // celle-ci est directement retournée et on sort de la fonction
     File::open("hello.txt")?.read_to_string(&mut s)?;
 
     Ok(s)
 }
 ----
+
+== Opérateur ?
+
+- Si le résultat est `Err`, l'opérateur ? retourne l'erreur.
+- Si le résultat est `Ok(x)`, l'opérateur ? retourne `x`.
+
+== Exercice
+
+Faire une somme de nombre imaginaires.
+
+[source, rust]
+----
+struct Imaginary {
+    real: f64,
+    im: f64,
+}
+
+fn sum(vs: &Vec<Imaginary>) -> Imaginary {
+    let mut res = Imaginary {real:0.0, im: 0.0};
+    for e in vs {
+        res.real += e.real;
+        res.im += e.im;
+    }
+    res
+}
+----
+
