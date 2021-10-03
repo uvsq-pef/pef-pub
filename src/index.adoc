@@ -14,5 +14,6 @@ include::attributes.adoc[]
 include::intro/intro.adoc[]
 include::devtools/devtools.adoc[]
 include::rust/rust.adoc[]
+include::modeles-memoire/modeles-memoire.adoc[]
 
 :leveloffset: -1
