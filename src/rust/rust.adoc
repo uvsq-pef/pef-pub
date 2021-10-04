@@ -7,5 +7,6 @@ endif::masterdoc[]
 :leveloffset: +1
 
 include::cons-specifiques.adoc[]
+include::poo.adoc[]
 
 :leveloffset: -1
