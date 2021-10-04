@@ -19,6 +19,8 @@ jobs:
       with:
         ruby-version: '2.7'
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Install Graphviz
+      run: sudo apt-get install -y graphviz
     - name: Run asciidoctor
       run: bundle exec asciidoctor -r asciidoctor-diagram -D html src/index.adoc
     - name: Deploy on gh-pages
