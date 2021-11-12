@@ -22,7 +22,9 @@ jobs:
     - name: Install Graphviz
       run: sudo apt-get install -y graphviz
     - name: Run asciidoctor
-      run: bundle exec asciidoctor -r asciidoctor-diagram -D html src/index.adoc
+      run: |
+        bundle exec asciidoctor -r asciidoctor-diagram -D html src/index.adoc
+        cp src/modeles-memoire/figs/memlayout.png src/modeles-memoire/figs/virtmem.svg figs/
     - name: Deploy on gh-pages
       uses: NickSchimek/deploy_jamstack_action@v1
       with:
