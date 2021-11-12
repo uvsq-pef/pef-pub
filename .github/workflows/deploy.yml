@@ -24,7 +24,7 @@ jobs:
     - name: Run asciidoctor
       run: |
         bundle exec asciidoctor -r asciidoctor-diagram -D html src/index.adoc
-        cp src/modeles-memoire/figs/memlayout.png src/modeles-memoire/figs/virtmem.svg figs/
+        cp src/modeles-memoire/figs/memlayout.png src/modeles-memoire/figs/virtmem.svg html/figs/
     - name: Deploy on gh-pages
       uses: NickSchimek/deploy_jamstack_action@v1
       with:
