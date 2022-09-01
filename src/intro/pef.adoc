@@ -13,6 +13,7 @@
 ** performances énergétiques (consommation d'énergie, impact environnemental)
 * Certains de ces critères peuvent être antagonistes
 * Les choix finaux relèvent souvent d'un compromis
+* La question de l'efficacité peut aussi se poser pour le cycle de développement lui-même
 
 == Références
 * https://reberhardt.com/cs110l/[CS 110L: Safety in Systems Programming] (https://reberhardt.com/blog/2020/10/05/designing-a-new-class-at-stanford-safety-in-systems-programming.html[blog])

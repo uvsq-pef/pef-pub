@@ -22,7 +22,7 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor (>= 2.0)
-  asciidoctor-diagram (>= 2.1)
+  asciidoctor-diagram (>= 2.2)
   asciidoctor-revealjs (>= 4.1)
 
 BUNDLED WITH

@@ -1,14 +1,15 @@
 = Caractéristiques des langages de programmation
 
 == Implémentation des langages
-* Avec un https://en.wikipedia.org/wiki/Compiled_language[_langage compilé_], le code source du programme est transformé en _code machine_ par le _compilateur_
-* Dans un https://en.wikipedia.org/wiki/Interpreted_language[_langage interprété_], le code source du programme est exécuté « à la volée » par l'_interpréteur_
+* Avec un _langage compilé_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Compiled_language"]^, le _code source_^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Code_source"]^ du programme est transformé en _code machine_^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Code_objet"]^ par le _compilateur_^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Compilateur"]^
+* Dans un _langage interprété_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Interpreted_language"]^, le code source du programme est exécuté « à la volée » par l'_interpréteur_^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Interpr%C3%A8te_(informatique)"]^
 * Certains langages sont à la fois compilés et interprétés
-* Il existe des approches intermédiaires (compilation _Just In Time_ (JIT))
+* Il existe des approches intermédiaires (compilation _Just In Time_ (JIT)^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Compilation_%C3%A0_la_vol%C3%A9e"]^)
 
-== C est compilé
+ifdef::backend-revealjs[== !]
+
+=== C est compilé
 .Compilation séparée (produit `util.o` et `main.o`)
-
 [source,bash,indent=0]
 ----
 $ gcc -c util.c
@@ -16,39 +17,38 @@ $ gcc -c main.c
 ----
 
 .Édition de liens (produit `monprog`)
-
 [source,bash,indent=0]
 ----
 $ gcc -o monprog main.o util.o
 ----
 
 .`monprog` est exécutable
-
 [source,bash,indent=0]
 ----
 $ ./monprog
 ----
 
-== PHP est interprété
+ifdef::backend-revealjs[== !]
 
-.Exécution d'un programme PHP
+=== Python est interprété
 
+.Exécution d'un programme Python
 [source,bash,indent=0]
 ----
-$ php monprog.php
+$ python3 monprog.py
 ----
 
-== Java est compilé puis interprété (JIT)
+ifdef::backend-revealjs[== !]
 
-.Compilation en _bytecode_ (produit Main.class)
+=== Java est compilé puis interprété (JIT)
 
+.Compilation en _bytecode_ (produit `Main.class`)
 [source,bash,indent=0]
 ----
 $ javac Main.java
 ----
 
 .Exécution avec la JVM (_Java Virtual Machine_)
-
 [source,bash,indent=0]
 ----
 $ java Main
@@ -56,13 +56,13 @@ $ java Main
 
 == Langage de scripts
 * Un _script_ est un programme destiné à automatiser l'enchaînement de tâches dans un environnement particulier
-* Un _langage de scripts_ est un langage de programmation permettant de développer des scripts
+* Un _langage de scripts_^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Langage_de_script"]^ est un langage de programmation permettant de développer des scripts
 * Il permet d'invoquer les primitives du système sous-jacent
-* Il dispose en général d'un _REPL_ (_Read-Eval-Print Loop_)
+* Il dispose en général d'un _REPL_ (_Read-Eval-Print Loop_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop"]^)
 * Quelques exemples
-** shells pour les OS : Bash, Zsh, tcsh
-** ECMAScript (Javascript) pour les navigateurs web
-** Lua embarqué dans une application (_VLC Media Player_, jeu _Battle for Wesnoth_)
+** shells^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Interpr%C3%A9teur_de_commandes"]^ pour les OS : https://www.gnu.org/software/bash/[Bash], https://www.zsh.org/[Zsh], https://www.tcsh.org/[tcsh]
+** https://www.ecma-international.org/publications-and-standards/standards/ecma-262/[ECMAScript] (Javascript) pour les navigateurs web
+** https://www.lua.org/[Lua] embarqué dans une application (https://wiki.videolan.org/Documentation:Building_Lua_Playlist_Scripts/[_VLC Media Player_], jeu https://wiki.wesnoth.org/LuaWML[_Battle for Wesnoth_])
 
 == Système de typage
 * Un _système de typage_ attribue des types aux éléments du langage
@@ -71,70 +71,73 @@ $ java Main
 ** en définissant les règles de compatibilité entre expressions
 ** en vérifiant ces contraintes
 
-== Typage explicite vs. implicite
+ifdef::backend-revealjs[== !]
+
+=== Typage explicite vs. implicite
 * Le typage est _explicite_ si les annotations de type sont visibles dans le code source
-
++
 .En C, chaque déclaration de variable précise son type
-
 [source,C,indent=0]
 ----
 int nombre = 1;
 double pi = 3.141592;
 ----
-
 * Le typage est _implicite_ si les types ne sont pas précisés dans le code source
-
-.En PHP, la première affectation crée la variable
-
-[source,php,indent=0]
++
+.En Python, la première affectation crée la variable
+[source,python,indent=0]
 ----
-$nombre = 1;
-$pi = 3.141592;
+nombre = 1
+pi = 3.141592
 ----
-
 * Des langages à typage explicite peuvent faire appel à l'_inférence de types_ dans certaines situations
 ** permet la déduction automatique des types
 
-== Typage statique vs. dynamique
+ifdef::backend-revealjs[== !]
+
+=== Typage statique vs. dynamique
 * Le typage est _statique_ si l'information de type est associée à l'identificateur
 ** => la vérification des types peut être réalisée lors de la compilation
 * Le typage est _dynamique_ si l'information de type est portée par l'objet lui-même
 ** => la vérification se fait durant l'exécution
 
-== Typage statique
+ifdef::backend-revealjs[== !]
+
+=== Typage statique
 * Améliore la fiabilité du programme (plus de vérifications plus précoces)
 * Meilleur support des outils (IDE)
 * Meilleures performances
 
 .En C, les erreurs de type sont identifiées par le compilateur
-
 [source,C,indent=0]
 ----
 double a = "une chaine";
 // error: incompatible types when initializing type ‘double’ using type ‘char *’
 ----
 
-== Typage dynamique
+ifdef::backend-revealjs[== !]
+
+=== Typage dynamique
 * Offre plus de souplesse dans l'écriture du code source
 ** _duck typing_, _data as code_, métaprogrammation
 * Permet le prototypage rapide
 
-.En PHP, les erreurs de type peuvent passer inaperçues
-
-[source,php,indent=0]
+.En Python, les erreurs de type peuvent passer inaperçues
+[source,python,indent=0]
 ----
-$a = 1;
-$a = "une chaine";
-echo $a + 2; // affiche 2
+pi = 3.14_15_92
+pi = 'π'
+print(pi * 2) // affiche ππ
 ----
 
-== Typage fort vs. faible
+ifdef::backend-revealjs[== !]
+
+=== Typage fort vs. faible
 * Le typage est _fort_ si les manipulations entre données de types différents sont limitées et contrôlées
 * Le typage est _faible_ si les possibilités de transtypage sont nombreuses et implicites
 * Ces notions sont relativement floues
 
 .Le C est à typage fort mais…
-
 [source,C,indent=0]
 ----
 int a = "une chaine";
@@ -153,73 +156,86 @@ printf("%d\n", a); // 443215...
 ** Programmation logique
 * Un langage *supporte un paradigme* quand il fournit les fonctionnalités pour utiliser ce style (de façon simple, sécurisée et efficace)
 
-== Exemple - Programmation logique avec Prolog
-* Prolog permet de définir et d'interroger une _base de faits_
-* Prolog est un langage déclaratif
-* Un _fait_ est une assertion simple
+ifdef::backend-revealjs[== !]
 
+=== Exemple - Programmation logique avec Prolog
+Prolog est un langage déclaratif qui permet de définir et d'interroger une _base de faits_
+
+.Un _fait_ est une assertion simple
 [source,prolog,indent=0]
 ----
 - Idéfix est un chien
 chien(idefix).
 ----
 
-* Une _règle_ décrit une inférence à partir des faits
-
+.Une _règle_ décrit une inférence à partir des faits
 [source,prolog,indent=0]
 ----
 - Les chiens aiment les arbres
 aimeLesArbres(X):- chien(X).
 ----
 
-* Une _requête_ est une question sur la _base de connaissance_
-
+.Une _requête_ est une question sur la _base de connaissance_
 [source,prolog,indent=0]
 ----
 - Idéfix aime-t'il les arbres ?
 ?- aimeLesArbres(idefix)
 ----
 
-== Solveur de Sudoku stem:[4 xx 4] en Prolog - Requête
+ifdef::backend-revealjs[== !]
+
+=== Solveur de Sudoku stem:[4 xx 4] en Prolog - Requête
 
 [source,prolog,indent=0]
 ----
 include::sudoku4_4.pl[lines=46..52]
 ----
 
-== Solveur de Sudoku stem:[4 xx 4] en Prolog - Résolution 1/3
+ifdef::backend-revealjs[== !]
+
+=== Solveur de Sudoku stem:[4 xx 4] en Prolog - Résolution 1/3
 
 [source,prolog,indent=0]
 ----
 include::sudoku4_4.pl[lines=11..21]
 ----
 
-== Solveur de Sudoku stem:[4 xx 4] en Prolog - Résolution 2/3
+ifdef::backend-revealjs[== !]
+
+=== Solveur de Sudoku stem:[4 xx 4] en Prolog - Résolution 2/3
 
 [source,prolog,indent=0]
 ----
 include::sudoku4_4.pl[lines=23..38]
 ----
 
-== Solveur de Sudoku stem:[4 xx 4] en Prolog - Résolution 3/3
+ifdef::backend-revealjs[== !]
+
+=== Solveur de Sudoku stem:[4 xx 4] en Prolog - Résolution 3/3
 
 [source,prolog,indent=0]
 ----
 include::sudoku4_4.pl[lines="1..10,40..44"]
 ----
 
-== Exemple - Programmation fonctionnelle avec Haskell
+ifdef::backend-revealjs[== !]
+
+=== Exemple - Programmation fonctionnelle avec Haskell
 * Haskell est un langage fonctionnel
 * Possède un système de typage statique, fort et principalement implicite (inférence de types)
 
-== Haskell 1/2
+ifdef::backend-revealjs[== !]
+
+=== Haskell 1/2
 
 [source,haskell,indent=0]
 ----
 include::exemples.hs[lines=1..16]
 ----
 
-== Haskell 2/2
+ifdef::backend-revealjs[== !]
+
+=== Haskell 2/2
 
 [source,haskell,indent=0]
 ----
@@ -244,15 +260,13 @@ include::exemples.hs[lines=18..24]
 * La plupart des langages ont une gestion automatique de la mémoire et s'appuient sur un _ramasse-miettes_ (_garbage collector_)
 
 .En Java, le ramasse-miettes est chargé de libérer la mémoire allouée dynamiquement
-
 [source,java,indent=0]
 ----
 int[] tableau = new int[10]; // allocation d'un tableau de 10 cases
 // la désallocation est automatique
 ----
 
-* Les langages C et C++ ont une gestion manuelle de la mémoire
-
+.Les langages C et C++ ont une gestion manuelle de la mémoire
 [source,C,indent=0]
 ----
 int[] tableau = malloc(10 * sizeof(int)); // allocation d'un tableau de 10 cases
@@ -273,6 +287,8 @@ free(tableau); // libération de la mémoire
 | PHP | Interprété | Oui | implicite, dynamique | proc., OO | auto
 
 | Python | Compilé, Interprété | Oui | implicite, dynamique | proc., OO, fonc. | auto
+
+| Rust | Compilé | Non | implicite, statique | proc., fonc., générique | manuelle
 
 | Scala | Compilé, interprété | Oui | implicite, statique | OO, fonc., générique | auto
 

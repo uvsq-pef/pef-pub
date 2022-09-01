@@ -1,16 +1,19 @@
 = Rust RefCard
 
 == Le langage Rust
+=== Historique
 * Conçu et développé initialement par Graydon Hoare (Mozilla Research) en 2010
 * Première version stable en 2015
+
+=== Caractéristiques du langage
 * Langage compilé à typage statique fort
 * Supporte les paradigmes impératif, fonctionnel et concurrent
-* Est accompagné de _cargo_ pour la gestion de la compilation et des bibliothèques
+* Gestion manuelle de la mémoire (pas de _garbage collector_)
 * Accès mémoire validés statiquement par le compilateur (_borrow checker_)
-* Pas de _garbage collector_
+* Est accompagné de _cargo_ pour la gestion de la compilation et des bibliothèques
 
 == Quelques domaines d'application
-* Parfois vu comme un possible successeur de C/C++
+.Parfois vu comme un possible successeur de C/C++
 * Programmation système
 * Applications en ligne de commande
 * Applications Web (via WebAssembly)
@@ -36,14 +39,13 @@ include::exemples/hello.rs[]
 
 == Gestion de la compilation
 === Compilateur
-* Le compilateur Rust se nomme https://doc.rust-lang.org/rustc/index.html[`rustc`]
-+
+.Le compilateur Rust se nomme https://doc.rust-lang.org/rustc/index.html[`rustc`]
 [source,bash]
 ----
 $ rustc hello.rs
 ----
-* Quelques options
-+
+
+.Quelques options
 [horizontal]
 `-L`:: ajoute un répertoire au chemin de recherche des bibliothèques
 `--edition`:: précise l'https://doc.rust-lang.org/edition-guide/introduction.html[édition] de Rust à utiliser (2015|2018|2021)
@@ -56,8 +58,7 @@ $ rustc hello.rs
 ifdef::backend-revealjs[== !]
 
 === Système de build
-* Le système de build intégré avec Rust se nomme https://doc.rust-lang.org/cargo/index.html[`cargo`]
-+
+.Le système de build intégré avec Rust se nomme https://doc.rust-lang.org/cargo/index.html[`cargo`]
 [source,bash]
 ----
 $ cd src/intro/exemples/hello
@@ -69,8 +70,8 @@ $ cargo run
      Running `target/debug/hello`
 Hello, world!
 ----
-* Quelques commandes et options
-+
+
+.Quelques commandes et options
 [horizontal]
 `build`:: construit le _crate_ en mode débogage
 `--release`::: optimise le code et génère en mode distribution
@@ -81,16 +82,14 @@ Hello, world!
 ifdef::backend-revealjs[== !]
 
 === Exécuter le programme
-* Le programme généré est un exécutable natif du système cible
-+
+.Le programme généré est un exécutable natif du système cible
 [source,bash]
 ----
 $ ./hello
 ----
 
 == Débuter un projet Rust
-* L'initialisation d'un projet Rust s'appuie sur https://doc.rust-lang.org/cargo/index.html[`cargo`]
-+
+.L'initialisation d'un projet Rust s'appuie sur https://doc.rust-lang.org/cargo/index.html[`cargo`]
 [source,bash]
 ----
 $ cargo new hello
@@ -102,16 +101,17 @@ hello
 $ cd hello/
 $ cargo build
 ----
-* `cargo` initialise un projet Rust avec
-** un nouveau répertoire du nom du projet,
-** un dépôt `git`,
-** un fichier `Cargo.toml` décrivant le projet,
-** un sous-répertoire pour le code source,
-** un fichier `main.rs` contenant le `main` du _crate_
+
+.`cargo` initialise un projet Rust avec
+* un nouveau répertoire du nom du projet,
+* un dépôt `git`,
+* un fichier `Cargo.toml` décrivant le projet,
+* un sous-répertoire pour le code source,
+* un fichier `main.rs` contenant le `main` du _crate_
 
 == Notions de base
 * Un code source Rust est une séquence de caractères Unicode UTF-8
-* Une unité de compilation Rust est dénommée un https://doc.rust-lang.org/stable/reference/crates-and-source-files.html[_crate_]
+* Une unité de compilation Rust est dénommée un https://doc.rust-lang.org/stable/reference/crates-and-source-files.html[_crate_] (_caisse_)
 * Un _crate_ contient des https://doc.rust-lang.org/stable/reference/items/modules.html[_modules_] imbriqués
 * Un fichier source (extension `.rs`) est un module
 * La plupart des instructions se terminent par un `;`
@@ -119,7 +119,7 @@ $ cargo build
 == Commentaires
 * https://doc.rust-lang.org/stable/reference/comments.html[Commentaires]
 [horizontal]
-`/* ... */`::: le texte entre `/*` et `*/` est ignoré (peuvent être imbriqués)
+`/* ... */`::: le texte entre `/\*` et `*/` est ignoré (peuvent être imbriqués)
 `/** ... */`::: commentaire de documentation (équiv. à l'https://doc.rust-lang.org/stable/rustdoc/the-doc-attribute.html[attribut doc] `#[doc="..."]`)
 `/*! ... */`::: commentaire de documentation interne (équiv. à l'https://doc.rust-lang.org/stable/rustdoc/the-doc-attribute.html[attribut doc] `#[doc="..."]`)
 `// ...`::: le texte jusqu'à la fin de la ligne est ignoré
@@ -154,7 +154,7 @@ $ cargo build
 
 == Variables
 * Les variables en Rust sont par défaut immuables
-** par défaut, quand une valeur est attachée à une variable, elle ne peut plus être modifiée
+** quand une valeur est attachée à une variable, elle ne peut plus être modifiée
 * Le mot-clé `let` permet de déclarer une variable
 +
 [source,rust,indent=0]
@@ -174,6 +174,13 @@ let mut x = 5;
 let x = 5;
 let x = x * 2;
 ----
+* Chaque variable possède un type qui est inféré la plupart du temps
+* Le type d'une variable peut aussi être précisé
++
+[source,rust,indent=0]
+----
+let x: u32 = 5;
+----
 
 == Constantes
 * Une https://doc.rust-lang.org/stable/reference/items/constant-items.html[constante] est introduite par le mot-clé `const` et doit être annotée par son type
@@ -186,23 +193,94 @@ const MAX_POINTS: u32 = 100_000;
 
 TIP: Expérimentez en utilisant par exemple https://github.com/rust-lang/rustlings[rustlings]
 
-== Référence et pointeur
+== Référence
 * En Rust, toute valeur _appartient_ à une variable (https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html[_ownership_])
+** à un instant donné, il ne peut y avoir qu'un unique propriétaire
+** quand le propriétaire sort de sa portée, la valeur est détruite
 * Il est possible d'_emprunter_ (_borrow_) la valeur d'une variable avec une référence (`&`)
-* Pour pouvoir changer une valeur par une référence, il faut que cette dernière soit modifiable (`&mut`)
-* Un https://doc.rust-lang.org/book/ch04-03-slices.html[_slice_] (`[T]`) permet de référencer une portion d'une séquence contiguë d'éléments
-* En plus des références, la bibliothèque standard propose différents types de _smart pointers_
+** la propriété n'est alors pas transférée
+** pour pouvoir modifier une valeur par l'intermédiaire d'une référence, il faut que cette dernière soit modifiable (`&mut`)
+** quand il existe une référence mutable pour une valeur, aucune autre référence ne peut pointer sur la valeur
+* Pour déréférencer une référence, on utilise l'opérateur `*`
+** la plupart du temps, le déréférencement se fait implicitement
+
+TIP: voir l'exemple sur les chaînes de caractères
+
+== Slice
+* Un https://doc.rust-lang.org/book/ch04-03-slices.html[_slice_] (`[T]`) est un type primitif permettant de référencer une portion d'une séquence contiguë d'éléments
+** c'est une vue sur un bloc de mémoire représentée par un pointeur et une taille
+** cf. le type primitif https://doc.rust-lang.org/std/primitive.slice.html[slice]
+** cf. le module https://doc.rust-lang.org/std/slice/index.html[`std::slice`]
+* Un slice est une sorte de référence (donc n'est pas propriétaire)
+* Un slice peut être immuable (`&[T]`) ou modifiable (`&mut [T]`)
+
+TIP: voir l'exemple sur les chaînes de caractères
+
+== _Smart pointers_
+.En plus des références, la bibliothèque standard propose différents types de _smart pointers_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Smart_pointer"]^
 [horizontal]
 https://doc.rust-lang.org/std/boxed/index.html[`Box<T>`]::: pour allouer des valeurs sur le tas
 https://doc.rust-lang.org/std/rc/index.html[`Rc<T>`]::: un type de comptage de références pour gérer les propriétaires multiples
 https://doc.rust-lang.org/std/cell/index.html[`Ref<T>`, `RefMut<T>`]::: accédé par `RefCell<T>`, un type pour gérer les emprunts lors de l'exécution au lieu de la compilation
 
 == Chaînes de caractères
-* Le type primitif https://doc.rust-lang.org/1.54.0/std/primitive.str.html[`str`] est un slice de type `[u8]` généralement manipulé sous une forme empruntée `&str`
-* La plupart des fonctions suppose qu'une valeur de type `str` contient une chaîne UTF-8
+=== Type primitif https://doc.rust-lang.org/1.54.0/std/primitive.str.html[`str`]
+* Le type primitif https://doc.rust-lang.org/1.54.0/std/primitive.str.html[`str`] est un slice de type `[u8]` (séquence d'octet)
+** la plupart des fonctions suppose qu'une valeur de type `str` contient une chaîne UTF-8
+* Généralement manipulé sous la forme empruntée `&str`
 * Un littéral est de type `&'static str`
-* Le module https://doc.rust-lang.org/std/str/index.html[std::str]
-* Le type https://doc.rust-lang.org/std/string/struct.String.html[std::string::String] permet de représenter des chaînes UTF-8 modifiables
+* Le module https://doc.rust-lang.org/std/str/index.html[std::str] permet la manipulation des variables de ce type
+* Quelques opérations :
+https://doc.rust-lang.org/std/primitive.str.html#method.chars[`chars`],
+https://doc.rust-lang.org/std/primitive.str.html#method.contains[`contains`],
+https://doc.rust-lang.org/std/primitive.str.html#method.find[`find`],
+https://doc.rust-lang.org/std/primitive.str.html#method.get[`get`]
+https://doc.rust-lang.org/std/primitive.str.html#method.is_empty[`is_empty`],
+https://doc.rust-lang.org/std/primitive.str.html#method.len[`len`],
+https://doc.rust-lang.org/std/primitive.str.html#method.replace[`replace`],
+https://doc.rust-lang.org/std/primitive.str.html#method.split[`split`],
+https://doc.rust-lang.org/std/primitive.str.html#method.trim[`trim`]
+
+ifdef::backend-revealjs[== !]
+
+=== Exemple
+.src/intro/exemples/strings.rs
+[source,rust,indent=0]
+----
+include::exemples/strings.rs[tag=str]
+----
+<1> `hello` est de type `&'static str`
+<2> Extraction d'un sous-slice
+<3> La macro `println!` formate et affiche une chaîne sur la sortie standard
+
+ifdef::backend-revealjs[== !]
+
+=== Type https://doc.rust-lang.org/std/string/struct.String.html[std::string::String]
+* Le type https://doc.rust-lang.org/std/string/struct.String.html[std::string::String] est le type chaîne de caractères proposé par la bibliothèque standard
+* Une instance de ce type possède la propriété du contenu de la chaîne
+* Quelques opérations :
+https://doc.rust-lang.org/std/string/struct.String.html#method.new[`new`],
+https://doc.rust-lang.org/std/string/struct.String.html#method.with_capacity[`with_capacity`],
+https://doc.rust-lang.org/std/string/struct.String.html#impl-From%3C%26str%3E[`from`],
+https://doc.rust-lang.org/std/string/struct.String.html#method.capacity[`capacity`],
+https://doc.rust-lang.org/std/string/struct.String.html#method.clear[`clear`],
+https://doc.rust-lang.org/std/string/struct.String.html#method.insert[`insert`],
+https://doc.rust-lang.org/std/string/struct.String.html#method.is_empty[`is_empty`],
+https://doc.rust-lang.org/std/string/struct.String.html#method.len[`len`],
+https://doc.rust-lang.org/std/string/struct.String.html#method.push_str[`push_str`],
+https://doc.rust-lang.org/std/string/struct.String.html#impl-Add%3C%26str%3E[`+`] (concaténation),
+https://doc.rust-lang.org/std/macro.format.html[`format!`]
+
+ifdef::backend-revealjs[== !]
+
+=== Exemple
+.src/intro/exemples/strings.rs
+[source,rust,indent=0]
+----
+include::exemples/strings.rs[tag=string]
+----
+<1> `hello` et `world` sont de type `String`
+<2> Concatène les deux variables (`hello` est déplacé, `world` est emprunté)
 
 == Structures de contrôle
 === Conditionnelle
@@ -331,7 +409,7 @@ ifdef::backend-revealjs[== !]
 * https://stevedonovan.github.io/rust-gentle-intro/[A Gentle Introduction To Rust], _Steve Donovan_
 * https://blog.guillaume-gomez.fr/Rust/[Tutoriel Rust], _Guillaume Gomez_
 * https://cheats.rs/[Rust Language Cheat Sheet], _Ralf Biedert_
-* https://serokell.io/blog/learn-rust[17 Resources to Help You Learn Rust in 2021], _Gints Dreimanis_, 2021
+* https://serokell.io/blog/learn-rust[17 Resources to Help You Learn Rust in 2022], _Gints Dreimanis_, 2022
 
 ifdef::backend-revealjs[== !]
 

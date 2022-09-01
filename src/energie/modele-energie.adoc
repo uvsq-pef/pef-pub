@@ -161,7 +161,7 @@ image:yoko.png[Wattmètre Yokogawa WT210, 200]
 - Résolution élevée d'échantillonage
 - Ne mesure pas les composants en dehors du CPU/GPU
 
-== Comparaison RAPL vs. Wattmètre (Nehalem)
+== Comparaison RAPL vs. Wattmètre (Haswell)
 
 image:calib-yoko.svg[RAPL vs. Wattmètre, 600]
 
@@ -174,6 +174,7 @@ image:calib-yoko.svg[RAPL vs. Wattmètre, 600]
 - Meilleure conception technologique (réduire capacitance et courants de fuite)
 - Gate-clocking: extinction sélective des parties inactives du CPU.
 - Sleep-modes (P-state and C-state) & DVFS (Dynamic Voltage Frequency Scaling)
+- Power gating (désactivation d'un cœur complet)
 - Consolidation de charge et extinction de nœuds inactifs dans un cluster
 - Optimisations logicielles
 
@@ -249,7 +250,8 @@ image:resnet.png[FPO (Milliards d'Opérations Flottantes) vs. Justesse, Schwartz
 - Introduction to Power Consumption in Dig. Int. Circuits, Tisserand, ECOFAC 2010.
 - Design Challenges of Technology Scaling. Borkar. IEEE. 1999.
 - The future of microprocessors. Borkar et Chien. ACM. 2011.
-- Dennard Scaling and other Power considerations, S. Gai 2020. 
+- Dennard Scaling and other Power considerations, S. Gai 2020.
+- Benefits in Relaxing the Power Capping Constraint, C. Daniele et al. 2017.
 - Racing and Pacing to Idle: Theoretical and Empirical Analysis of Energy Optimization Heuristics, Kim, Ines, Hoffmann. IEEE 2015.
 - Adaptive, Transparent Frequency and Voltage Scaling of
 Communication Phases in MPI Programs, Lim, Freeh, Lowenthal. ACM/IEEE SC 2006.
