@@ -118,10 +118,10 @@ ifdef::backend-revealjs[== !]
 .Outils
 * https://github.com/rust-lang/rustfmt[rustfmt]
 
-== Documenter un code source (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Software_documentation"])
+== Documenter un code source
 //TODO différences entre documenter une API et documenter pour un développeur
 
-=== Qu'est-ce qu'une bonne documentation ?
+=== Qu'est-ce qu'une bonne documentation^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Software_documentation#Technical_documentation"]^ ?
 * Un commentaire doit clarifier le code
 ** la documentation du code doit permettre à une autre personne de mieux comprendre le code
 * Documentez pourquoi les choses sont faites et pas simplement ce qui est fait
@@ -178,9 +178,9 @@ pub fn add_one(x: i32) -> i32 {
 }
 ----
 
-== Audit de code source (icon:wikipedia-w[link="http://en.wikipedia.org/wiki/Software_inspection"]) et Analyse statique (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Analyse_statique_de_programmes"])
+== Audit de code source et Analyse statique
 === Audit de code source
-* L'_audit_ ou _revue_ de code consiste à étudier attentivement un code source afin de détecter et de corriger des erreurs
+* L'_audit_ ou _revue_^icon:wikipedia-w[link="http://en.wikipedia.org/wiki/Software_inspection"]^ de code consiste à étudier attentivement un code source afin de détecter et de corriger des erreurs
 * L'objectif est d'améliorer la qualité du logiciel et l'expérience des développeurs
 * Peut prendre différentes formes
 [horizontal]
@@ -194,7 +194,7 @@ ifdef::backend-revealjs[== !]
 === Analyse statique du code
 * Certaines erreurs se reproduisent fréquemment dans un fichier source (`;` après un `for`, …)
 * La plupart de ces erreurs peuvent être recherchées de façon systématique
-* L'_analyse statique_ permet d'obtenir des informations sur un programme sans l'exécuter
+* L'_analyse statique_^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Analyse_statique_de_programmes"]^ permet d'obtenir des informations sur un programme sans l'exécuter
 * Elle est un bon complément aux tests
 * En général, elle n'a pas connaissance de ce que le programme doit faire (recherche de motifs généraux)
 * Des outils proposent un moteur ainsi qu'un ensemble de règles permettant de trouver ce type d'erreurs dans un fichier source
@@ -253,7 +253,7 @@ ifdef::backend-revealjs[== !]
 Correction:: le code ne fait clairement pas ce qui est attendu
 ** _déréférencement d'une référence null_
 Mauvaise pratique:: le code ne respecte pas les bonnes pratiques
-** _redéfinition d'_equals_ sans _hashCode_, comparaison de chaîne avec _==_
+** redéfinition d'_equals_ sans _hashCode_, comparaison de chaîne avec _==_
 Problème de sécurité:: le code est vulnérable à un usage malveillant
 ** _injection SQL_
 Code suspect:: le code utilise des pratiques non usuelles

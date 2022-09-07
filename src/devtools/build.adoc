@@ -38,8 +38,8 @@ https://www.continuum.io/anaconda-overview[Anaconda]
 
 |===
 
-== Automatisation du __build__ (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Build_automation"])
-* La gestion de la compilation (\emph{Build automation}) consiste à automatiser les tâches répétitives des développeurs
+== Automatisation du __build__
+* La gestion de la compilation^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Build_automation"]^ (_Build automation_) consiste à automatiser les tâches répétitives des développeurs
 ** compilation (mode normal, mode débogage, …), génération de la version de distribution, génération de la documentation et des notes de version, lancement des tests, déploiement
 * Ces tâches sont alors réalisées plus efficacement et moins sujettes aux erreurs
 ** évite les fastidieuses lignes de commande
@@ -93,7 +93,7 @@ ifdef::backend-revealjs[== !]
 ifdef::backend-revealjs[== !]
 
 === Description du projet
-* La https://doc.rust-lang.org/cargo/reference/manifest.html[description du projet] se trouve dans le fichier `Cargo.toml` qui est au format https://toml.io/[TOML] (Tom’s Obvious, Minimal Language)
+* La https://doc.rust-lang.org/cargo/reference/manifest.html[description du projet] se trouve dans le fichier `Cargo.toml` qui est au format https://toml.io/[TOML] (Tom’s Obvious Minimal Language)
 +
 [source,toml,indent=0]
 ----
@@ -105,7 +105,7 @@ edition = "2018"
 [dependencies] <2>
 ----
 <1> La section `package` décrit le projet (un _package_ Rust)
-<2> La section `dependencies` liste des bibliothèques dont dépend le projet
+<2> La section `dependencies` liste les bibliothèques dont dépend le projet
 
 ifdef::backend-revealjs[== !]
 

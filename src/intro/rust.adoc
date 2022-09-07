@@ -417,3 +417,5 @@ ifdef::backend-revealjs[== !]
 ** https://play.rust-lang.org/[Playground] (coder dans le navigateur)
 ** https://github.com/rust-lang/rustlings/[rustlings] (ensemble d'exercices pour apprendre le langage)
 ** https://doc.rust-lang.org/stable/rust-by-example/[Rust by Example] (exemples exécutables dans le navigateur)
+** https://practice.rs/why-exercise.html[Rust by practice]
+** https://rust-unofficial.github.io/too-many-lists/[Learn Rust With Entirely Too Many Linked Lists]

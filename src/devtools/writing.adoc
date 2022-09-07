@@ -1,19 +1,19 @@
 = Écrire du code et collaborer
 
 == Éditeur de texte
-* Un _éditeur de texte_ (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Text_editor"]) permet l'édition de fichiers en texte brut (par opposition aux traitements de texte).
+* Un _éditeur de texte_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Text_editor"]^ permet l'édition de fichiers en texte brut (par opposition aux traitements de texte).
 * C'est un outil indispensable pour rédiger le code source d'un programme.
 
 ifdef::backend-revealjs[== !]
 
 .Fonctionnalités d'un éditeur de texte pour développer
-* Support des https://fr.wikipedia.org/wiki/Codage_des_caract%C3%A8res[jeux de caractères étendus] (https://fr.wikipedia.org/wiki/UTF-8[UTF-8], https://fr.wikipedia.org/wiki/ISO/CEI_8859-1[Latin-1], …)
+* Support des jeux de caractères étendus^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Codage_des_caract%C3%A8res"]^ (UTF-8^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/UTF-8"]^, Latin-1^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/ISO/CEI_8859-1"]^, …)
 * Défaire/refaire, couper/copier/coller, rechercher/remplacer, …
-* Support des https://fr.wikipedia.org/wiki/Expression_r%C3%A9guli%C3%A8re[expressions rationnelles] (_regex_)
+* Support des expressions rationnelles^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Expression_r%C3%A9guli%C3%A8re"]^ (_regex_)
 * Aides à la saisie (coloration syntaxique, indentation automatique, reformatage, …)
 * Pliage (_folding_)/dépliage (_unfolding_) de texte
-* https://en.wikipedia.org/wiki/Snippet_(programming)[_Snippet_] (insertion de texte type)
-* Index des fonctions (https://en.wikipedia.org/wiki/Ctags[_ctags_], …)
+* _Snippet_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Snippet_(programming)"]^ (insertion de texte type)
+* Index des fonctions (_ctags_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Ctags"]^, …)
 * Appel de programmes externes (compilateur, …)
 * Support de projets (ensemble de fichiers avec une configuration)
 
@@ -27,8 +27,8 @@ ifdef::backend-revealjs[== !]
 * https://www.sublimetext.com/[Sublime Text]
 * https://atom.io/[Atom]
 
-== Environnement de développement intégré (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Integrated_development_environment"])
-* Un _environnement de développement intégré_ (_Integrated Development Environment_ ou _IDE_) regroupe et intègre un ensemble d'outils de développement
+== Environnement de développement intégré
+* Un _environnement de développement intégré_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Integrated_development_environment"]^ (_Integrated Development Environment_ ou _IDE_) regroupe et intègre un ensemble d'outils de développement
 ** éditeur de code source,
 ** compilateur/interpréteur,
 ** débogueur,
@@ -67,8 +67,8 @@ https://microsoft.github.io/PTVS/[Python Tools for Visual Studio]
 
 |===
 
-== Gestion des versions (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Version_control"])
-* La _gestion de versions_ (_version control_, _revision control_, _source control_ ou _source code management (SCM)_) consiste à maintenir l'ensemble des versions d'un ou plusieurs documents
+== Gestion des versions
+* La _gestion de versions_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Version_control"]^ (_version control_, _revision control_, _source control_ ou _source code management (SCM)_) consiste à maintenir l'ensemble des versions d'un ou plusieurs documents
 * La gestion de versions concerne principalement le développement logiciel mais peut être utilisée pour tout document informatique
 * C'est une activité fastidieuse et source d'erreurs qui bénéficie d'une façon importante d'un support logiciel (_système de gestion de versions_, _version control system (VCS)_)
 * De nombreuses applications proposent ce genre de fonction (_Wiki_, _LibreOffice_, _Microsoft Word_, …)
@@ -76,11 +76,10 @@ https://microsoft.github.io/PTVS/[Python Tools for Visual Studio]
 ifdef::backend-revealjs[== !]
 
 === Système de gestion de versions
-Un _système de gestion de versions_ (VCS)
-
+.Un _système de gestion de versions_ (VCS)
 * Permet la gestion des versions successives d'un ensemble de documents
 ** conserve toutes les versions successives dans un _référentiel_ ou _dépôt_ (_repository_)
-** permet de revenir aisément à une version antérieure
+·** permet de naviguer entre les versions
 * Permet le travail collaboratif
 ** chaque utilisateur travaille sur une copie locale
 ** le système signale les conflits
@@ -91,14 +90,14 @@ ifdef::backend-revealjs[== !]
 * Gestion d'un ensemble de fichiers textes
 ** code source
 ** pages html, xml, …
-** documents \LaTeX
+** documents LaTeX
 * Supportent l'organisation en hiérarchie de répertoires et les métadonnées (permissions, …)
-* Supportent également les fichiers binaires mais l'intérêt diminue
+* Supportent également les fichiers binaires (moins adapté)
 
 ifdef::backend-revealjs[== !]
 
 === Modèles pour la gestion de version
-CAUTION: Sans contrôle, la modification d'un même fichier par deux personnes au même moment risque de générer des incohérences.
+CAUTION: Sans contrôle, la modification d'un même fichier par plusieurs personnes au même moment risque de générer des incohérences.
 
 .Approche par verrouillage (_locking_)
 * un fichier doit être verrouillé avant une modification
@@ -138,8 +137,8 @@ http://www.nongnu.org/cvs/[CVS],
 http://cssc.sourceforge.net/[SCCS],
 http://www.cs.purdue.edu/homes/trinkle/RCS/[RCS],
 
-== Forge logicielle (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Forge_(software)"])
-* Une _forge logicielle_ est un système de gestion de développement collaboratif.
+== Forge logicielle
+* Une _forge logicielle_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Forge_(software)"]^ est un système de gestion de développement collaboratif.
 * Elle intègre un ensemble d'outils dans une interface web et permet d'héberger un projet informatique à l'aide d'un système de gestion de versions.
 
 .Outils intégrés
