@@ -139,7 +139,9 @@ $ cargo build
 `u8, u16, u32, u64, u128, usize`:: Entier non signé (8, 16, 32, 64, 128 bits ou dépendant de l'architecture)
 `f32, f64`:: Nombre en virgule flottante (simple ou double précision)
 `char`:: Caractère Unicode (32 bits)
-`str`:: Chaîne de caractères UTF-8 (taille dynamique)
+`str`:: Chaîne de caractères UTF-8
+
+TIP: Expérimentez (https://github.com/rust-lang/rustlings/tree/main/exercises/primitive_types[rustlings], https://practice.rs/basic-types/numbers.html[Rust By Practice])
 
 == Littéraux
 * Un https://doc.rust-lang.org/stable/reference/tokens.html#literals[littéral] représente la valeur d'un type
@@ -182,6 +184,8 @@ let x = x * 2;
 let x: u32 = 5;
 ----
 
+TIP: Expérimentez (https://github.com/rust-lang/rustlings/tree/main/exercises/variables[rustlings], https://practice.rs/variables.html[Rust By Practice])
+
 == Constantes
 * Une https://doc.rust-lang.org/stable/reference/items/constant-items.html[constante] est introduite par le mot-clé `const` et doit être annotée par son type
 +
@@ -190,8 +194,6 @@ let x: u32 = 5;
 const MAX_POINTS: u32 = 100_000;
 ----
 * Une constante peut être déclarée dans n'importe quelle portée et doit être initialisée par une expression constante
-
-TIP: Expérimentez en utilisant par exemple https://github.com/rust-lang/rustlings[rustlings]
 
 == Référence
 * En Rust, toute valeur _appartient_ à une variable (https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html[_ownership_])
@@ -214,7 +216,11 @@ TIP: voir l'exemple sur les chaînes de caractères
 * Un slice est une sorte de référence (donc n'est pas propriétaire)
 * Un slice peut être immuable (`&[T]`) ou modifiable (`&mut [T]`)
 
-TIP: voir l'exemple sur les chaînes de caractères
+[TIP]
+====
+* Voir l'exemple sur les chaînes de caractères
+* Expérimentez (https://practice.rs/compound-types/slice.html[Rust By Practice])
+====
 
 == _Smart pointers_
 .En plus des références, la bibliothèque standard propose différents types de _smart pointers_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Smart_pointer"]^
@@ -282,6 +288,8 @@ include::exemples/strings.rs[tag=string]
 <1> `hello` et `world` sont de type `String`
 <2> Concatène les deux variables (`hello` est déplacé, `world` est emprunté)
 
+TIP: Expérimentez (https://github.com/rust-lang/rustlings/tree/main/exercises/strings[rustlings], https://practice.rs/compound-types/string.html[Rust By Practice])
+
 == Structures de contrôle
 === Conditionnelle
 * Expression `if`
@@ -337,6 +345,8 @@ for number in (1..4).rev() {
 ** `for` permet d'itérer sur les éléments d'une collection
 ** en utilisant le type https://doc.rust-lang.org/std/ops/struct.Range.html[`Range`], on peut manipuler des indices
 
+TIP: Expérimentez (https://github.com/rust-lang/rustlings/tree/main/exercises/if[rustlings], https://practice.rs/flow-control.html[Rust By Practice])
+
 == Fonction
 * La définition d'une https://doc.rust-lang.org/book/ch03-03-how-functions-work.html[fonction] est introduite par le mot-clé `fn`
 * Par convention, le nom de la fonction est écrit en https://fr.wikipedia.org/wiki/Snake_case[_snake case_]
@@ -361,6 +371,8 @@ fn five() -> i32 {
 +
 WARNING: pour pouvoir être retournée, la dernière ligne d'une fonction *doit être une expression* (pas de `;`). Une instruction (terminée par un `;`) provoquerait une erreur de compilation.
 
+TIP: Expérimentez (https://github.com/rust-lang/rustlings/tree/main/exercises/functions[rustlings], https://practice.rs/basic-types/functions.html[Rust By Practice])
+
 == Système de modules
 * Rust supporte différents moyens pour organiser un projet
 +
@@ -377,6 +389,8 @@ use std::fmt::Result;
 use std::io::Result as IoResult;
 ----
 
+TIP: Expérimentez (https://github.com/rust-lang/rustlings/tree/main/exercises/modules[rustlings])
+
 == Bibliothèques
 * Rust est distribué avec une riche https://doc.rust-lang.org/std/index.html[bibliothèque standard]
 ** accessible par le _path_ `std`
@@ -387,14 +401,14 @@ use std::io::Result as IoResult;
 == Quelques types et modules importants
 [horizontal]
 https://doc.rust-lang.org/std/ops/struct.Range.html[`Range`]:: représente un intervalle (littéral `start..end`)
-https://doc.rust-lang.org/std/primitive.tuple.html[`Tuple`]:: une séquence finie et hétérogène d'éléments (littéral `("hello", 5, 'c')`)
-https://doc.rust-lang.org/1.54.0/std/primitive.array.html[`Tableau`]:: un tableau de taille fixe d'éléments de même type (littéral `[x, y, z]` ou `[x; N]`)
-https://doc.rust-lang.org/std/vec/struct.Vec.html[`Vec<T>`]:: un tableau de taille variable
-https://doc.rust-lang.org/std/result/index.html[`Result<T, E>`]:: pour retourner et propager une erreur
-https://doc.rust-lang.org/std/option/index.html[`Option<T>`]:: pour représenter une valeur optionnel
+https://doc.rust-lang.org/std/primitive.tuple.html[`Tuple`]:: une séquence finie et hétérogène d'éléments (littéral `("hello", 5, 'c')`) (https://practice.rs/compound-types/tuple.html[Rust By Practice])
+https://doc.rust-lang.org/1.54.0/std/primitive.array.html[`Tableau`]:: un tableau de taille fixe d'éléments de même type (littéral `[x, y, z]` ou `[x; N]`) (https://practice.rs/compound-types/array.html[Rust By Practice])
+https://doc.rust-lang.org/std/vec/struct.Vec.html[`Vec<T>`]:: un tableau de taille variable (https://github.com/rust-lang/rustlings/tree/main/exercises/vecs[rustlings], https://practice.rs/collections/vector.html[Rust By Practice])
+https://doc.rust-lang.org/std/result/index.html[`Result<T, E>`]:: pour retourner et propager une erreur (https://practice.rs/result-panic/result.html[Rust By Practice])
+https://doc.rust-lang.org/std/option/index.html[`Option<T>`]:: pour représenter une valeur optionnel (https://github.com/rust-lang/rustlings/tree/main/exercises/options[rustlings])
 https://doc.rust-lang.org/std/collections/index.html[std::collections]:: manipulation de collections
-https://doc.rust-lang.org/std/fmt/index.html[std::fmt] formatage de chaînes de caractères
-https://doc.rust-lang.org/std/io/index.html[std::io] gestion des I/O
+https://doc.rust-lang.org/std/fmt/index.html[std::fmt]:: formatage de chaînes de caractères (https://practice.rs/formatted-output/formatting.html[Rust By Practice])
+https://doc.rust-lang.org/std/io/index.html[std::io]:: gestion des I/O
 
 == Références
 === Documentation officielle
