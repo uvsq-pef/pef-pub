@@ -5,15 +5,15 @@
 * D'autres peuvent y être avantageusement ajoutés
 
 == Shells
-* Le https://fr.wikipedia.org/wiki/Interface_syst%C3%A8me[_Shell_] (ou https://fr.wikipedia.org/wiki/Interpr%C3%A9teur_de_commandes[_interpréteur de commandes_]) est l'https://fr.wikipedia.org/wiki/Interface_en_ligne_de_commande[interface en ligne de commande] (_Command Line Interface_ ou _CLI_) permettant d'interagir avec le système d'exploitation
+* Le _Shell_^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Interface_syst%C3%A8me"]^ (ou _interpréteur de commandes_^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Interpr%C3%A9teur_de_commandes"]^) est l'interface en ligne de commande^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Interface_en_ligne_de_commande"]^ (_Command Line Interface_ ou _CLI_) permettant d'interagir avec le système d'exploitation
 * C'est un outil important que doit maîtriser un développeur
 * À l'aide du langage de script qu'il intègre, le shell fournit un puissant moyen pour l'automatisation de tâches récurrentes
-* Il peut être largement personnalisé et adapté grace aux fichiers d'initialisation (_dot files_ sous Unix)
+* Il peut être largement personnalisé et adapté grâce aux fichiers d'initialisation (_dot files_ sous Unix)
 
 .Quelques shells
 [horizontal]
-Unix/Linux/Mac OS:: http://www.gnu.org/software/bash/[bash] (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Bourne-Again_shell"]), https://www.zsh.org/[zsh] (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Z_Shell"])
-Windows:: https://docs.microsoft.com/en-us/powershell/[PowerShell] (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Windows_PowerShell"]), cmd (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Cmd"])
+Unix/Linux/Mac OS:: http://www.gnu.org/software/bash/[bash] ^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Bourne-Again_shell"]^, https://www.zsh.or/[zsh] ^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Z_Shell"]^
+Windows:: https://docs.microsoft.com/en-us/powershell/[PowerShell] ^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Windows_PowerShell"]^, cmd^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Cmd"]^
 
 ifdef::masterdoc[]
 [NOTE]
@@ -35,28 +35,28 @@ endif::masterdoc[]
 
 == Outils en ligne de commande
 === Manipulation de fichiers
-* https://the.exa.website/[exa] / ls (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Ls"]) / tree (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Tree_(command)"])
-* bat (icon:github[link="https://github.com/sharkdp/bat"]) / cat (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Cat_(Unix)"])
-* fzf (icon:github[link="https://github.com/junegunn/fzf"])
-* fd (icon:github[link="https://github.com/sharkdp/fd"]) / https://www.gnu.org/software/findutils/[find]
-* rg (icon:github[link="https://github.com/BurntSushi/ripgrep"]) / skim (icon:github[link="https://github.com/lotabout/skim"]) / https://www.gnu.org/software/grep/[grep]
-* dust (icon:github[link="https://github.com/bootandy/dust"]) / https://dev.yorhel.nl/ncdu[ncdu] / du (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Du_(Unix)"])
-* duf (icon:github[link="https://github.com/muesli/duf"]) / df (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Df_(Unix)"])
-* sd (icon:github[link="https://github.com/chmln/sd"]) / sed (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Stream_Editor"]) / awk (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Awk"])
-* tokei (icon:github[link="https://github.com/XAMPPRocky/tokei"])
+* https://the.exa.website/[exa] / ls^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Ls"]^ / tree^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Tree_(command)"]^
+* bat^icon:github[link="https://github.com/sharkdp/bat"]^ / cat^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Cat_(Unix)"]^
+* fzf^icon:github[link="https://github.com/junegunn/fzf"]^
+* fd^icon:github[link="https://github.com/sharkdp/fd"]^ / https://www.gnu.org/software/findutils/[find]
+* rg^icon:github[link="https://github.com/BurntSushi/ripgrep"]^ / skim^icon:github[link="https://github.com/lotabout/skim"]^ / https://www.gnu.org/software/grep/[grep]
+* dust^icon:github[link="https://github.com/bootandy/dust"]^ / https://dev.yorhel.nl/ncdu[ncdu] / du^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Du_(Unix)"]^
+* duf^icon:github[link="https://github.com/muesli/duf"]^ / df^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Df_(Unix)"]^
+* sd^icon:github[link="https://github.com/chmln/sd"]^ / sed^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Stream_Editor"]^ / awk^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Awk"]^
+* tokei^icon:github[link="https://github.com/XAMPPRocky/tokei"]^
 
 ifdef::backend-revealjs[== !]
 
 === Gestion de processus/mémoire
-* hyperfine (icon:github[link="https://github.com/sharkdp/hyperfine"]) / time (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Time_(Unix)"])
-* procs (icon:github[link="https://github.com/dalance/procs"]) / ps (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Ps_(Unix)"])
-* https://htop.dev/[htop] / bottom (icon:github[link="https://github.com/ClementTsang/bottom"]) / top (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Top_(software)"]) / free (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Free_(Unix)"])
+* hyperfine^icon:github[link="https://github.com/sharkdp/hyperfine"]^ / time^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Time_(Unix)"]^
+* procs^icon:github[link="https://github.com/dalance/procs"]^ / ps^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Ps_(Unix)"]^
+* https://htop.dev/[htop] / bottom^icon:github[link="https://github.com/ClementTsang/bottom"]^ / top^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Top_(software)"]^ / free^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Free_(Unix)"]^
 
 ifdef::backend-revealjs[== !]
 
 === Outils réseaux
-* ssh (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Secure_Shell"])
-* tmux (icon:github[link="https://github.com/tmux/tmux/wiki"]) / tmuxinator (icon:github[link="https://github.com/tmuxinator/tmuxinator"]) / Oh my tmux! (icon:github[link="https://github.com/gpakosz/.tmux"]) / https://www.byobu.org/[byobu] / https://www.gnu.org/software/screen/[screen]
+* ssh^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Secure_Shell"]^
+* tmux^icon:github[link="https://github.com/tmux/tmux/wiki"]^ / tmuxinator^icon:github[link="https://github.com/tmuxinator/tmuxinator"]^ / Oh my tmux!^icon:github[link="https://github.com/gpakosz/.tmux"]^ / https://www.byobu.org/[byobu] / https://www.gnu.org/software/screen/[screen]
 
 == Références
 * https://zaiste.net/posts/shell-commands-rust/[Rewritten in Rust: Modern Alternatives of Command-Line Tools]

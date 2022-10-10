@@ -3,108 +3,70 @@
 
 = Rust: Types composites et constructions spécifiques
 
-== Chaînes de caractères
+== Tableaux
+* Le type primitif https://doc.rust-lang.org/std/primitive.array.html[tableau] permet de manipuler
+** des collections de taille fixe
+** allouées sur la pile
+** d'éléments de même type
+* La création d'un tableau se fait :
+** à partir d'une liste d'éléments entre `[]` (`[1, 3, 5, 7]`), ou
+** à partir d'une expression et d'un nombre de copies (`[x; N]` _N_ copies de _x_)
+* L'accès aux éléments se fait par indice (`t[0]`)
 
-- Il existe deux types en Rust pour représenter les chaînes.
-** `String` pour une chaîne allouée dynamiquement sur le tas.
-** `&str` pour une référence vers une chaîne de taille fixe. &str est appellé une _slice_ (partie) de chaîne.
-- Les chaînes littérales (`"Hello World!"`) retournent un `&str` vers une zone de mémoire statique.
-
-== Chaînes: exemple
-
-[source, rust]
+.src/rust/exemples/array.rs
+[source,rust,indent=0]
 ----
-let s1: &str = "Hello World!"; // alloué à la compilation
-let mut s2: String = String::from("Bye bye"); // alloué dynamiquement sur le tas
-s2.push('!'); //s2 est mutable
-let s3: &str = &s2[4..];
-println!("{}", s3); // affiche: bye!
+include::exemples/array.rs[tag=array]
 ----
 
 == Les vecteurs
-
-- Pour représenter un tableau de valeurs, Rust propose le type `Vec<T>`
+- Pour représenter un tableau de valeurs de taille variable, Rust propose le type https://doc.rust-lang.org/std/vec/struct.Vec.html[`Vec<T>`]
 - Les vecteurs sont alloués dynamiquement sur le tas.
 
-[source, rust]
+.création d'un vecteur (src/rust/exemples/vec.rs)
+[source,rust,indent=0]
 ----
-let mut v: Vec<i32> = Vec::new();
-v.push(5);
-v.push(6);
-v.push(7);
-
-let w: Vec<i32> = vec![5, 6, 7]; //macro équivalent
+include::exemples/vec.rs[tag=create]
 ----
 
-== Accéder aux éléments d'un vecteur
+ifdef::backend-revealjs[== !]
 
-[source, rust]
+.Accéder aux éléments d'un vecteur (src/rust/exemples/vec.rs)
+[source,rust,indent=0]
 ----
-let mut v = vec![1, 2, 3, 4, 5];
-
-let x: &i32 = &v[2]; // panique si l'index n'existe pas
-
-match v.get(2) {
-    Some(y) => println!("v[3] == {}", y),
-    None => println!("index non-existant")
-}
-
-v[2] = 42; // car le vecteur v est mutable
+include::exemples/vec.rs[tag=access]
 ----
 
-== Initialisation avec une taille connue
+ifdef::backend-revealjs[== !]
 
-[source, rust]
+.Initialisation avec une taille connue (src/rust/exemples/vec.rs)
+[source,rust,indent=0]
 ----
-let n : usize = 100;
-let zero_v = vec![0; n];
-let one_v = vec![1; n];
+include::exemples/vec.rs[tag=init]
 ----
+<1> `usize` est le type entier pour les positions d'un vecteur.
 
-- `usize` est le type entier pour les positions d'un vecteur.
+ifdef::backend-revealjs[== !]
 
-== Itérer sur un vecteur
-
-[source, rust]
+.Itérer sur un vecteur (src/rust/exemples/vec.rs)
+[source,rust,indent=0]
 ----
-let mut v = vec![1, 2, 3, 4, 5];
-
-// itération non-mutable, i est de type &i32
-for i in &v {
-    println!("{}", i);
-}
-
-// itération mutable, i est de type &mut i32
-// on peut incrémenter chaque élément du vecteur
-for i in &mut v {
-    *i += 1;
-}
+include::exemples/vec.rs[tag=iter]
 ----
 
-== Itérer sur un vecteur (sans référence)
+ifdef::backend-revealjs[== !]
 
-[source, rust]
+.Itérer sur un vecteur sans référence (src/rust/exemples/vec.rs)
+[source,rust,indent=0]
 ----
-let mut v = vec![1, 2, 3, 4, 5];
-
-// itération directement sur le vecteur les éléments du vecteur
-// sont « déplacés » dans i. v ne pourra plut être utilisé par la
-// suite.
-for i in v {
-    println!("{}", i);
-}
-
-v[0] = 15; // ERREUR
+include::exemples/vec.rs[tag=iterv]
 ----
+<1> ERREUR : _borrow of moved value: `v`_. Nous verrons précisément ce point dans le cours sur le _Borrow Checker_.
 
-- Nous verrons précisément ce point dans le cours sur le _Borrow Checker_.
-
-== Généricité ?
-
+== Généricité 
 - Le type de `vec![1,2,3]` est `std::Vec<i32>`
 - Le type de `vec!["a","b","c"]` est `std::Vec<&str>`
-
-- `std::Vec<T>` est générique de paramètre `T`
+- `std::Vec<T>` est https://doc.rust-lang.org/book/ch10-01-syntax.html[générique de paramètre `T`]
 - `T` peut être remplacé ici par tout autre type
 - Les méthodes de `std::Vec<T>` peuvent utiliser le type générique:
 
@@ -115,126 +77,88 @@ pub fn pop(&mut self) -> Option<T> // dépile un élément
 ----
 
 == Structures
-
 - Une structure est un type composite composé de membres
 
-[source, rust]
+.src/rust/exemples/struct.rs
+[source,rust,indent=0]
 ----
-struct Personne {
-    nom: String,
-    année_naissance: i32,
-}
-
-let mut ada = Personne {
-    nom : String::from("Ada Lovelace"),
-    année_naissance: 0,
-};
-
-println!("nom = {}", ada.nom);
-ada.année_naissance = 1815;
+include::exemples/struct.rs[tag=struct]
 ----
 
-== Constructeur
+ifdef::backend-revealjs[== !]
 
+=== Constructeur
 - On appelle _constructeur_ une fonction qui retourne une instance de la structure.
 - Dans le cours suivant nous verrons comment associer directement des méthodes à une structure.
 
-[source, rust]
+.src/rust/exemples/struct.rs
+[source,rust,indent=0]
 ----
-fn nouvelle_personne(nom: String, année: i32) -> Personne {
-    Personne {
-        année_naissance: année,
-        nom, // sucre syntaxique
-    }
-}
+include::exemples/struct.rs[tag=cons]
 ----
 
 == Tuples
-- Les tuples sont un cas particulier de structure où les membres ne sont pas nommés.
-
-[source, rust]
+- Le type primitif https://doc.rust-lang.org/std/primitive.tuple.html[tuples] regroupe un ensemble de valeurs de types hétérogènes
++
+.src/rust/exemples/tuple.rs
+[source,rust,indent=0]
 ----
-struct ColorRGB(u8, u8, u8);
-let color = ColorRGB(255, 0, 0);
-
-// On peut utiliser .0 .1 pour nommer les champs
-println!("red channel = {}", color.0);
-
-// On peut aussi déconstruire la structure avec du pattern matching
-let ColorRGB(r, g, b) = color;
+include::exemples/tuple.rs[tag=tuple]
+----
+<1> le type de `tuple` est `(&'static str, i32, char)`
+<2> accès aux champs par `.0`, `.1`, …
+<3> _pattern matching_ pour déconstruire le tuple
+- Les https://doc.rust-lang.org/book/ch05-01-defining-structs.html#using-tuple-structs-without-named-fields-to-create-different-types[structures tuples] sont un cas particulier de structure où les membres ne sont pas nommés (similaires au type primitif tuple)
++
+.src/rust/exemples/tuple.rs
+[source,rust,indent=0]
+----
+include::exemples/tuple.rs[tag=tuplestruct]
 ----
 
 == Enum
-    - Les types `Enum` sont des types disjoints.
+- Les types https://doc.rust-lang.org/reference/items/enumerations.html[`Enum`] sont des types disjoints.
+- Chaque instance ne peut avoir qu'un seul des types à la fois.
 
-[source, rust]
+.src/rust/exemples/enum.rs
+[source,rust,indent=0]
 ----
-    enum Variant {
-        Rien,
-        Nombre(i32),
-        Texte(String),
-    }
-
-    let v1: Variant = Variant::Rien;
-    let v2: Variant = Variant::Nombre(42);
-    let v3: Variant = Variant::Texte(String::from("Hello"));
-
+include::exemples/enum.rs[tag=enum]
 ----
-
-    - Ici `Variant` peut contenir au choix un entier signé, une chaîne ou rien du tout.
-    - Chaque instance ne peut avoir qu'un seul des types à la fois.
-
+<1> `Variant` peut contenir au choix un entier signé, une chaîne ou rien du tout.
 
 == Pattern matching
-
+- Le https://doc.rust-lang.org/book/ch06-02-match.html[_pattern matching_] permet de
+** représenter un structure conditionnelle avec plusieurs branches
+** déconstruire les types composites
 - Le _pattern matching_ est très pratique pour manipuler les types `Enum`
 
-[source, rust]
+.src/rust/exemples/enum.rs
+[source,rust,indent=0]
 ----
-fn affiche(v: Variant) {
-    match v {
-        Variant::Rien => println!("Le variant est vide"),
-        Variant::Nombre(n) => println!("Le variant contient le nombre {}", n),
-        Variant::Texte(s) => println!("Le variant contient le texte {}", s),
-    }
-}
+include::exemples/enum.rs[tag=match]
 ----
 
-== Gestion des exceptions: std::Option<T>
-
-- En C/C++ on représente souvent l'absence de valeur par un pointeur `nullptr`.
-- Cet usage est cause de nombreuses erreurs difficiles à détecter, c'est pourquoi Rust interdit les références nulles.
-- Rust utilise le type `Option<T>` avec deux variants
+== Gestion des erreurs
+- En C/C++, on représente souvent l'absence de valeur par un pointeur https://en.cppreference.com/w/cpp/language/nullptr[`nullptr`].
+** cet usage est cause de nombreuses erreurs difficiles à détecter, c'est pourquoi Rust interdit les références nulles.
+- Rust utilise le type https://doc.rust-lang.org/std/option/enum.Option.html[`Option<T>`] avec deux variants
 ** `None` qui représente l'absence de valeur
 ** `Some(T)` qui représente une valeur de type `T` (`T` est un type générique)
 
-== Exemple: std::Option<T>
+ifdef::backend-revealjs[== !]
 
-[source, rust]
+.src/rust/exemples/option.rs
+[source,rust,indent=0]
 ----
-fn racine(n : f64) -> Option<f64> {
-    if n > 0.0 {
-        Some(n.sqrt())
-    } else {
-        None
-    }
-}
-
-racine(25.0);  // -> Some(5.0)
-racine(-25.0); // -> None
-
-if let Some(r) = racine(25) {
-    ...
-} else {
-    ...
-}
-
-// panique si None
-let v : f64 = racine(25.0).unwrap(); 
-let v : f64 = racine(25.0).expect("erreur: racine d'un nombre négatif"); 
+include::exemples/option.rs[tag=option]
 ----
+<1> https://doc.rust-lang.org/reference/expressions/if-expr.html#if-let-expressions[`if let`] permet de déconstruire une valeur d'un type composite
 
-== std::Result<T,E>
+ifdef::backend-revealjs[== !]
+
+=== std::Result<T,E>
+- https://doc.rust-lang.org/std/result/enum.Result.html[`Result`] est semblable à une option mais permet d'encoder une erreur de type `E`.
 
 [source, rust]
 ----
@@ -244,157 +168,91 @@ enum Result<T, E> {
 }
 ----
 
-- `Result` est semblable à une option mais permet d'encoder une erreur de type `E`.
+ifdef::backend-revealjs[== !]
 
-== Erreurs fatales
-
+=== Erreurs fatales
 - Souvent une fonction a intérêt à retourner un `Result` à l'appelant et lui laisser décider de la marche à suivre en cas d'erreur.
-- Parfois, cela n'a pas de sens et il vaut mieux arrêter le programme avec le macro `!panic()`:
+- Parfois, cela n'a pas de sens et il vaut mieux arrêter le programme avec la macro `panic!()`:
 
 [source, rust]
 ----
 panic!("This is not implemented yet.");
 ----
 
-== std::Result<T,E>
+ifdef::backend-revealjs[== !]
 
-- Contrairement aux Options, un `Result` doit toujours être utilisé.
+=== Consommation de la valeur `Result`
+- Contrairement à `Option``, un `Result` doit toujours être utilisé.
 - Le compilateur génère un avertissement si un `Result` n'est pas consommé.
 
-[source, rust]
+.src/rust/exemples/option.rs
+[source,rust,indent=0]
 ----
-use std::fs::File;
-
-fn main() {
-    let r : Result<File, std::io::Error> = File::open("hello.txt");
-
-    let f : File = match r {
-        Ok(fichier) => fichier,
-        Err(erreur) => panic!("Erreur d'ouverture: {:?}", erreur),
-    };
-}
+include::exemples/option.rs[tag=result]
 ----
 
-== Convertir entre Result<T, E> et Option<T>
+ifdef::backend-revealjs[== !]
 
+=== Conversions entre Result<T, E> et Option<T>
 - Les types `Result` et `Option` sont proches.
 - Il est possible de convertir un `Result` en `Option` avec `res.ok()` et inversement avec `opt.ok_or(err)`.
 
-[source, rust]
+.src/rust/exemples/option.rs
+[source,rust,indent=0]
 ----
-Ok(10).ok() -> Some(10)
-Err(_).ok() -> None
-
-Some(10).ok_or(Err(E)) -> Ok(10)
-None.ok_or(Err(E)) -> Err(E)
+include::exemples/option.rs[tag=conv]
 ----
 
+ifdef::backend-revealjs[== !]
 
-
-== Gestion fine d'erreurs
-
-[source, rust]
+=== Gestion fine d'erreurs
+.src/rust/exemples/option.rs
+[source,rust,indent=0]
 ----
-use std::fs::File;
-use std::io::ErrorKind;
-
-fn main() {
-    let f = File::open("hello.txt");
-
-    let f = match f {
-        Ok(fichier) => fichier,
-        Err(erreur) => match erreur.kind() {
-            ErrorKind::NotFound => match File::create("hello.txt") {
-                Ok(fc) => fc,
-                Err(e) => panic!("Erreur de création du fichier : {:?}", e),
-            },
-            autre_erreur => {
-                panic!("Erreur d'ouverture du fichier : {:?}", autre_erreur)
-            }
-        },
-    };
-}
+include::exemples/option.rs[tag=error]
 ----
 
-== Raccourci avec expect
+ifdef::backend-revealjs[== !]
 
-[source, rust]
+=== Raccourci avec expect
+.src/rust/exemples/option.rs
+[source,rust,indent=0]
 ----
-use std::fs::File;
-
-fn main() {
-    let f = File::open("hello.txt").expect("Échec à l'ouverture de hello.txt");
-}
+include::exemples/option.rs[tag=expect]
 ----
 
-== Propagation d'Erreurs
+ifdef::backend-revealjs[== !]
 
+=== Propagation d'Erreurs
 - Vos propres fonctions peuvent retourner des erreurs
 
-[source, rust]
+.src/rust/exemples/option.rs
+[source,rust,indent=0]
 ----
-fn lire_fichier() -> Result<String, io::Error> {
-    let f = File::open("hello.txt");
-
-    let mut f = match f {
-        Ok(fichier) => fichier,
-        Err(e) => return Err(e),
-    };
-
-    let mut s = String::new();
-
-    match f.read_to_string(&mut s) {
-        Ok(_) => Ok(s),
-        Err(e) => Err(e),
-    }
-}
+include::exemples/option.rs[tag=ownresult]
 ----
 
-== Opérateur ?
+ifdef::backend-revealjs[== !]
 
+=== Opérateur `?`
 - Écrire du code qui propage les erreurs est fastidieux
-- L'opérateur ? peut-être utilisé dans les fonctions qui retournent `Result` pour en faciliter l'écriture
+- L'opérateur `?` peut-être utilisé dans les fonctions qui retournent `Result` pour en faciliter l'écriture
+** si le résultat est `Err`, l'opérateur `?` retourne l'erreur.
+** si le résultat est `Ok(x)`, l'opérateur `?` retourne `x`.
 
-[source, rust]
+.src/rust/exemples/option.rs
+[source,rust,indent=0]
 ----
-use std::fs::File;
-use std::io;
-use std::io::Read;
-
-fn lire_fichier() -> Result<String, io::Error> {
-    let mut s = String::new();
-
-    // À chaque utilisation de ? si une erreur se produit,
-    // celle-ci est directement retournée et on sort de la fonction
-    File::open("hello.txt")?.read_to_string(&mut s)?;
-
-    Ok(s)
-}
+include::exemples/option.rs[tag=opint]
 ----
-
-== Opérateur ?
-
-- Si le résultat est `Err`, l'opérateur ? retourne l'erreur.
-- Si le résultat est `Ok(x)`, l'opérateur ? retourne `x`.
+<1> À chaque utilisation de ? si une erreur se produit, celle-ci est directement retournée et on sort de la fonction
 
 == Exercice
 
-Faire une somme de nombre imaginaires.
+Faire une somme de nombres imaginaires.
 
-[source, rust]
+.src/rust/exemples/imag.rs
+[source,rust,indent=0]
 ----
-struct Imaginary {
-    real: f64,
-    im: f64,
-}
-
-fn sum(vs: &Vec<Imaginary>) -> Imaginary {
-    let mut res = Imaginary {real:0.0, im: 0.0};
-    for e in vs {
-        res.real += e.real;
-        res.im += e.im;
-    }
-    res
-}
+include::exemples/imag.rs[]
 ----
-

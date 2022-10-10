@@ -6,18 +6,19 @@
 
 == Objet
 * Lors de son exécution, un _système OO_ est *un ensemble d'objets qui interagissent*
-* Les objets forment donc l'_aspect dynamique_ (à l'exécution) d'un système OO
+** les objets forment donc l'_aspect dynamique_ (à l'exécution) d'un système OO
 * Un _objet_ est formé de deux composants indissociables
 [horizontal]
 son _état_::: les valeurs prises par des variables le décrivant (_propriétés_)
 son _comportement_::: les opérations qui lui sont applicables
 * Un objet est une _instance_ d'une _classe_
-+NOTE: Dans certains langages objet (https://selflanguage.org/[Self] ou les anciennes versions de https://fr.wikipedia.org/wiki/JavaScript[Javascript]), la notion de classe n'existe pas. Les objets sont alors créés à partir de modèles nommés https://fr.wikipedia.org/wiki/Programmation_orient%C3%A9e_prototype[_prototypes_].
++
+NOTE: Dans certains langages objet (https://selflanguage.org/[Self] ou les anciennes versions de https://fr.wikipedia.org/wiki/JavaScript[Javascript]), la notion de classe n'existe pas. Les objets sont alors créés à partir de modèles nommés https://fr.wikipedia.org/wiki/Programmation_orient%C3%A9e_prototype[_prototypes_].
 * Un objet peut avoir plusieurs types, i.e. supporter plusieurs interfaces
 
-== Exemple : des points et des cercles
+ifdef::backend-revealjs[== !]
 
-.Diagramme d'objets UML
+=== Exemple : des points et des cercles
 [plantuml,points_and_circles,png]
 ....
 object point1 {
@@ -82,7 +83,9 @@ error: aborting due to previous error
 For more information about this error, try `rustc --explain E0616`.
 ----
 
-== Exemple : des points et des cercles en Rust
+ifdef::backend-revealjs[== !]
+
+=== Exemple : des points et des cercles en Rust
 [source,rust,indent=0]
 ----
 include::shapes/tests/integration_tests.rs[tag=circles_and_points]
@@ -103,9 +106,9 @@ include::shapes/tests/integration_tests.rs[tag=circles_and_points]
 ** le nom de l'opération à invoquer,
 ** les paramètres effectifs.
 
-== Exemple : déplacer un cercle
+ifdef::backend-revealjs[== !]
 
-.Diagramme de séquence UML
+=== Exemple : déplacer un cercle
 [plantuml,moving_circle,png]
 ....
 actor User
@@ -132,7 +135,9 @@ deactivate cercle1
 ** est définie dans le contexte d'une structure, d'une énumération ou d'un trait,
 ** possède toujours un premier paramètre nommé `self` et représentant l'instance sur laquelle la méthode est invoquée
 
-== Exemple : le rayon du cercle
+ifdef::backend-revealjs[== !]
+
+=== Exemple : le rayon du cercle
 [source,rust,indent=0]
 ----
 impl Circle {
@@ -140,7 +145,9 @@ include::shapes/src/circle.rs[tag=circle_radius]
 }
 ----
 
-== Exemple : déplacer un cercle
+ifdef::backend-revealjs[== !]
+
+=== Exemple : déplacer un cercle
 [source,rust,indent=0]
 ----
 include::shapes/tests/integration_tests.rs[tag=move_a_circle]
@@ -166,8 +173,9 @@ include::shapes/src/point.rs[tag=point_from]
 ** l'ensemble des opérations applicables à cette donnée (définition en _intention_).
 * Un type spécifie l'_interface_ par laquelle une donnée peut être manipulée
 
-== Exemple : un type Déplaçable
+ifdef::backend-revealjs[== !]
 
+=== Exemple : un type Déplaçable
 [plantuml,deplacable,png]
 ....
 interface Déplaçable {
@@ -180,13 +188,17 @@ interface Déplaçable {
 * Une méthode d'un trait peut être abstraite ou disposer d'une implémentation par défaut
 * Un trait est proche de la notion d'_interface_ ou de _classe abstraite_ dans d'autres langages
 
-== Exemple : le _trait_ Déplaçable
+ifdef::backend-revealjs[== !]
+
+=== Exemple : le _trait_ Déplaçable
 [source,rust,indent=0]
 ----
 include::shapes/src/movable.rs[]
 ----
 
-== Exemple : l'implémentation du _trait_ Déplaçable dans Point
+ifdef::backend-revealjs[== !]
+
+=== Exemple : l'implémentation du _trait_ Déplaçable dans Point
 [source,rust,indent=0]
 ----
 include::shapes/src/point.rs[tag=point_movable_impl]
@@ -196,6 +208,10 @@ include::shapes/src/point.rs[tag=point_movable_impl]
 * Une _classe_ est un "modèle" (un "moule") pour une catégorie d'objets structurellement identiques
 * Une classe définit donc l'implémentation d'un objet (son état interne et le codage de ses opérations)
 * L'ensemble des classes décrit l'_aspect statique_ d'un système OO
+
+ifdef::backend-revealjs[== !]
+
+=== Structure d'une classe
 * Une classe comporte:
 ** la définition des _attributs_ (ou _variables d'instance_),
 ** la _signature_ des opérations (ou _méthodes_),
@@ -205,9 +221,9 @@ include::shapes/src/point.rs[tag=point_movable_impl]
 * L'ensemble des signatures de méthodes représente l'interface de la classe (publique)
 * L'ensemble des définitions d'attributs et de méthodes forme l'implémentation de la classe (privé)
 
-== Exemple : les classes `Cercle2D` et `Point2D`
+ifdef::backend-revealjs[== !]
 
-.Diagramme de classes UML
+=== Exemple : les classes `Cercle2D` et `Point2D`
 [plantuml,classe_point_cercle,png]
 ....
 class Point2D {
@@ -230,7 +246,9 @@ Cercle2D *-- Point2D
 ** 3ième pavé: signature des méthodes
 * en général, les attributs sont privés et les méthodes publiques
 
-== Instanciation d'une classe
+ifdef::backend-revealjs[== !]
+
+=== Instanciation d'une classe
 * Le mécanisme d'_instanciation_ permet de créer des objets à partir d'une classe
 * Chaque objet est une instance d'une classe
 * Lors de l'instanciation,
@@ -244,7 +262,9 @@ Cercle2D *-- Point2D
 ** par défaut, tout est privé
 ** le https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html#exposing-paths-with-the-pub-keyword[mot-clé `pub`] permet d'exporter les constructions souhaitées
 
-== Exemple : la structure Cercle
+ifdef::backend-revealjs[== !]
+
+=== Exemple : la structure Cercle
 [source,rust,indent=0]
 ----
 include::shapes/src/circle.rs[]
@@ -255,8 +275,9 @@ include::shapes/src/circle.rs[]
 * Un objet peut avoir plusieurs types mais est une instance d'une seule classe
 * Des objets de classes différentes peuvent avoir le même type
 
-== Exemple : cercles et points sont de type Déplaçable
+ifdef::backend-revealjs[== !]
 
+=== Exemple : cercles et points sont de type Déplaçable
 [plantuml,classe_et_type,png]
 ....
 interface Déplaçable {
@@ -290,8 +311,9 @@ De façon duale, un type T~1~ est un _sous-type_ d'un type T~2~ si l'ensemble de
 * Un sous-type possède une interface plus riche, i.e. au moins toutes les opérations du super-type
 * De manière équivalente, l'extension du super-type contient l'extension du sous-type, i.e. tout objet du sous-type est aussi instance du super-type
 
-== Exemple : Déplaçable et Modifiable
+ifdef::backend-revealjs[== !]
 
+=== Exemple : Déplaçable et Modifiable
 [plantuml,deplacable_et_redimensionnable,png]
 ....
 interface Déplaçable {
@@ -313,7 +335,9 @@ Déplaçable <|-- Modifiable
 ** Y est une classe _fille_ (_sous-classe_, _classe dérivée_) et que
 ** X est une classe _mère_ (_super-classe_, _classe de base_)
 
-== Exemple : rectangle et rectangle plein
+ifdef::backend-revealjs[== !]
+
+=== Exemple : rectangle et rectangle plein
 
 [plantuml,rectangle_et_rectangle_plein,png]
 ....
@@ -345,7 +369,9 @@ Rectangle2D <|-- Rectangle2DPlein
 * Le type d'un objet trait est construit à partir d'un type de pointeur (référence ou smart pointer), du mot-clé `dyn` et du nom du trait
 * Un objet trait dispose d'une _table de méthodes virtuelles_ (_vtable_)
 
-== Exemple : objet trait
+ifdef::backend-revealjs[== !]
+
+=== Exemple : objet trait
 [source,rust,indent=0]
 ----
 include::shapes/tests/integration_tests.rs[tag=circle_as_movable]
@@ -359,8 +385,9 @@ include::shapes/tests/integration_tests.rs[tag=circle_as_movable]
 * Dans un langage de programmation, les deux visions peuvent être représentées de la même façon:
 le mécanisme d'héritage permet d'implémenter l'un ou l'autre
 
-== Exemple : héritage d'implémentation et d'interface
+ifdef::backend-revealjs[== !]
 
+=== Exemple : héritage d'implémentation et d'interface
 [plantuml,heritage_et_interface,png]
 ....
 interface Déplaçable {
@@ -396,7 +423,9 @@ Modifiable <|.. Rectangle2D
 * Une sous-classe peut _redéfinir_ une méthode de sa super-classe pour spécialiser son comportement
 * Le choix de la méthode à appeler est retardé jusqu'à l'exécution du programme (https://en.wikipedia.org/wiki/Dynamic_dispatch[_dynamic dispatch_])
 
-== Exemple : une description pour les rectangles
+ifdef::backend-revealjs[== !]
+
+=== Exemple : une description pour les rectangles
 
 [plantuml,description_des_rectangles,png]
 ....
@@ -430,8 +459,9 @@ include::shapes/tests/integration_tests.rs[tag=move_shapes]
 * En général, son comportement ne peut pas être intégralement implémenté à cause de son niveau de généralisation
 * Elle sera donc seulement utilisée comme classe de base dans une hiérarchie d'héritage
 
-== Exemple : La hiérarchie d'héritage des figures
+ifdef::backend-revealjs[== !]
 
+=== Exemple : La hiérarchie d'héritage des figures
 [plantuml,hierarchie_heritage,png]
 ....
 abstract class Forme {
@@ -460,8 +490,9 @@ NOTE: Rust ne comporte pas de notion aussi générale que celle de classe abstra
 ** deux classes de base peuvent posséder la même méthode,
 ** un attribut peut être hérité selon plusieurs chemins dans le graphe d'héritage.
 
-== Exemple : une hiérarchie pour les véhicules
+ifdef::backend-revealjs[== !]
 
+=== Exemple : une hiérarchie pour les véhicules
 [plantuml,heritage_multiple,png]
 ....
 abstract class Véhicule {

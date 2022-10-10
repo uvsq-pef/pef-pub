@@ -1,10 +1,10 @@
 = Débogage, tests et profilage
 // https://fr.wikipedia.org/wiki/Analyse_dynamique_de_programmes
 
-== Débogage (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Debugging"])
+== Débogage
 === Bogue, débogage et débogueur
 * Un _bogue_ (_bug_) est un défaut dans un programme qui l'empêche de fonctionner correctement
-* Le _débogage_ (_debugging_) est une activité ayant pour objectif de localiser les bogues dans un programme
+* Le _débogage_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Debugging"]^ (_debugging_) est une activité ayant pour objectif de localiser les bogues dans un programme
 * Le débogage est basé sur la _confirmation_
 ** c'est un processus destiné à confirmer les choses que l'on croit vrai jusqu'à en trouver une qui ne l'est pas
 * Un _débogueur_ (_debugger_) est un outil fournissant une aide pour le débogage
@@ -18,7 +18,7 @@ ifdef::backend-revealjs[== !]
 *** perte de temps
 *** beaucoup d'éditions/compilations pour ajouter/enlever les affichages
 *** moins informatif
-** utiliser une bibliothèque de journalisation (_logging_) (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Historique_(informatique)"])
+** utiliser une bibliothèque de journalisation^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Historique_(informatique)"]^ (_logging_)
 *** plus pratique que les affichages
 *** moins informatif que le débogueur
 
@@ -29,7 +29,7 @@ ifdef::backend-revealjs[== !]
 ** pas à pas sommaire (sans entrer dans les fonctions)
 ** pas à pas détaillé
 ** retour en arrière (plus rare)
-* Pose de _points d'arrêt_ (_breakpoints_)
+* _Points d'arrêt_ (_breakpoints_)
 ** repère sur une instruction signalant au débogueur qu'il doit faire un pause dans l'exécution lorsqu'il arrive à cette instruction
 ** peut être également associé à une condition
 ** un _point d'observation_ (_watchpoint_) stoppe le programme lorsque l'état d'une expression change
@@ -50,16 +50,16 @@ ifdef::backend-revealjs[== !]
 . Examiner le contexte pour confirmer que les variables possèdent les valeurs attendues
 . Déterminer la position suivante à étudier et retourner en 5
 
-IMPORTANT: Nécessite de compiler le programme avec les informations de débogage (option `-g` de `javac` ou de `gcc`)
+IMPORTANT: Nécessite de compiler le programme avec les informations de débogage (option `-g` de `rustc`, `javac` ou de `gcc`)
 
 .Quelques débogueurs
 * http://www.gnu.org/software/gdb/gdb.html[GDB]/ http://www.gnu.org/software/ddd/[DDD]
 * https://blog.logrocket.com/debugging-rust-apps-with-gdb/[rust-gdb]
 * https://docs.python.org/3/library/pdb.html[pdb]/ https://github.com/gotcha/ipdb[ipdb]
 
-== Tests (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Software_testing"])
+== Tests
 === Définition et intérêt
-* Les _tests_ visent à mettre en évidence des défauts de l'élément testé
+* Les _tests_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Software_testing"]^ visent à mettre en évidence des défauts de l'élément testé
 * L'objectif final est bien sûr de réduire le nombre de bogues présents dans un programme
 * Un test est un ensemble de _cas à tester_ (conditions initiales, entrées, observations attendues)
 
@@ -102,8 +102,8 @@ ifdef::backend-revealjs[== !]
 .Quelques outils pour les tests
 [horizontal]
 Unitaires et d'intégration:: cf. ci-dessous.
-Fonctionnel (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Functional_testing"]):: http://fit.c2.com/[Fit], http://fitnesse.org/[FitNesse].
-Non fonctionnels (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Non-functional_testing"]):: http://jakarta.apache.org/jmeter/[Apache JMeter], http://www.clarkware.com/software/JUnitPerf.html[JUnitPerf].
+Fonctionnel^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Functional_testing"]^:: http://fit.c2.com/[Fit], http://fitnesse.org/[FitNesse].
+Non fonctionnels^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Non-functional_testing"]^:: http://jakarta.apache.org/jmeter/[Apache JMeter], http://www.clarkware.com/software/JUnitPerf.html[JUnitPerf].
 
 == Tests unitaires
 === Définition et objectifs
@@ -156,7 +156,7 @@ ifdef::backend-revealjs[== !]
 Fantôme:: un objet _fantôme_ (_dummy_) sert juste à remplir des listes de paramètres
 Substitut:: un objet _substitut_ (_fake_) fournit une implémentation simplifiée
 Bouchon:: un objet _bouchon_ (_stub_) retourne des réponses prédéfinies spécifiques aux tests
-Simulacre:: un objet _simulacre_ (_mock_) sont préprogrammés par des attentes, i.e. une spécification du comportement attendu
+Simulacre:: un objet _simulacre_ (_mock_) est préprogrammé par des attentes, i.e. une spécification du comportement attendu
 
 .Quelques frameworks de _doublure de test_ (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Test_double"])
 [%header]
@@ -190,7 +190,7 @@ fn it_adds_two() { //<2>
 <1> La fonction est annotée avec l'attribut `test`
 <2> La fonction ne prend pas de paramètre
 <3> Le résultat est vérifié avec la macro `assert!`, `assert_eq!` ou `assert_ne!`
-* L'annotation `should_panic` précise que le test réussi si la fonction échoue (_panic_)
+* L'annotation `should_panic` précise que le test réussit si la fonction provoque une erreur (_panic_)
 * L'annotation `ignore` ignore l'exécution de la fonction de test
 
 ifdef::backend-revealjs[== !]
@@ -253,16 +253,16 @@ ifdef::backend-revealjs[== !]
 
 === Quelques métriques
 * Le _Statement Coverage_ (ou _Line Coverage_) mesure le degré d'exécution de chaque ligne
-** simple mais ignore un certain nombre d'erreurs simples (ne prend pas en compte la logique du programme)
+** simple mais ignore un certain nombre d'erreurs (ne prend pas en compte la logique du programme)
 * Le _Condition Coverage_ indique si toutes les conditions ont été évaluées
-** les conditions doivent être évaluées à vrai et à faux pour obtenir un taux de 100\%
+** les conditions doivent être évaluées à vrai et à faux pour obtenir un taux de 100%
 ** aide à résoudre les problèmes de la mesure précédente
 * Le _Path coverage_ examine si chaque chemin a été parcouru
 * Le _Function Coverage_ vérifie si chaque fonction a été appelée
 
 IMPORTANT: *Un score de 100% ne garantit pas la correction du programme. Ce n'est même pas un objectif !*
 	
-.Couverture des tests (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Code_coverage"])
+.Couverture des tests^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Code_coverage"]^
 [%header]
 |===
 | Rust | Java
@@ -275,11 +275,11 @@ http://www.atlassian.com/software/clover/[Clover],
 |===
 
 == Développement piloté par les tests
-* Le _développement piloté par les tests_ (_Test Driven Development_ ou _TDD_) est une méthode de développement mettant l'accent sur les tests unitaires
+* Le _développement piloté par les tests_^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Test_driven_development"]^ (_Test Driven Development_ ou _TDD_) est une méthode de développement mettant l'accent sur les tests unitaires
 * Cette méthode préconise d'écrire les tests avant le code
 ** _Only ever write code to fix a failing test_
 * Cette approche permet de spécifier ce que l'on attend du système avant de le réaliser
-* Elle est basée sur les tests et le _\href{http://www.refactoring.com/_{refactoring}}
+* Elle est basée sur les tests et le http://www.refactoring.com/[refactoring]
 * Le refactoring consiste à améliorer la conception du programme sans en changer le comportement (les fonctionnalités)
 * Le TDD n'est pas limité aux tests unitaires mais s'applique aussi aux tests de recette (_Acceptance TDD_)
 
@@ -297,19 +297,19 @@ ifdef::backend-revealjs[== !]
 
 ifdef::backend-revealjs[== !]
 
-=== Programmation pilotée par le comportement (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Programmation_pilot%C3%A9e_par_le_comportement"])
-* Les pratiques de TDD peuvent être étendues vers la Programmation pilotée par le comportement (_Behaviour-Driven Development_ ou _BDD_)
+=== Programmation pilotée par le comportement
+* Les pratiques de TDD peuvent être étendues vers la Programmation pilotée par le comportement^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Programmation_pilot%C3%A9e_par_le_comportement"]^ (_Behaviour-Driven Development_ ou _BDD_)
 
 .Quelques frameworks de BDD
 http://cukes.info/[Cucumber],
 http://spockframework.org/[Spock],
 http://jbehave.org/[JBehave],
 
-== Optimisation et profilage (icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Profiling_(computer_programming)"])
+== Optimisation et profilage
 * L'_optimisation_ est la pratique qui consiste à modifier un système pour qu'il fonctionne plus efficacement
 ** par exemple plus rapidement ou en consommant moins de ressources
 ** L'optimisation est souvent un compromis entre différents facteurs
-* L'_analyse dynamique_ (_profiling_) d'un programme a pour objectif de collecter des informations sur le comportement d'une application pendant son exécution
+* L'_analyse dynamique_^icon:wikipedia-w[link="https://en.wikipedia.org/wiki/Profiling_(computer_programming)"]^ (_profiling_) d'un programme a pour objectif de collecter des informations sur le comportement d'une application pendant son exécution
 ** Les éléments à surveiller sont l'utilisation des CPU, l'utilisation de la mémoire, les _threads_, …
 
 WARNING: Ce type d'analyse a un impact sur le comportement de l'application.
@@ -319,7 +319,7 @@ ifdef::backend-revealjs[== !]
 === Mise en œuvre
 * Un outil d'analyse dynamique permet de collecter et de présenter les informations résultant de l'analyse de l'exécution
 * Utilisé pour l'analyse de performances, un tel outil permet de localiser les _points chauds_ (_hot spots_) du programme
-** point chaud: portion de code longue à exécuter
+** point chaud : portion de code longue à exécuter
 ** rapports sur les fonctions appelées, temps passé dans chaque fonction, …
 	
 .Quelques outils
@@ -354,5 +354,5 @@ ifdef::backend-revealjs[== !]
 . Choisir un paramètre à optimiser (temps CPU, occupation mémoire, …)
 . Localiser les portions de code les plus coûteuses vis à vis de ce paramètre
 ** permet d'obtenir le meilleur rendement
-** règle des 80/20  (icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Principe_de_Pareto"])
+** règle des 80/20^icon:wikipedia-w[link="https://fr.wikipedia.org/wiki/Principe_de_Pareto"]^
 . Appliquer les optimisations puis *mesurer le résultat*
