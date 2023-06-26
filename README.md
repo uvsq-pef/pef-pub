@@ -1,3 +1,6 @@
+# :no_entry: Dépôt archivé :no_entry:
+Ce dépôt n'est plus utilisé.
+
 # Programmation efficace
 
 ## Introduction
